@@ -21,4 +21,7 @@ Route::group([
 
     //素材管理
     $router->resource('materials', MaterialController::class);
+
+    //内容板块
+    $router->resource('onlines', OnlineController::class);
 });
