@@ -399,12 +399,24 @@ return [
         'wang-editor' => [
 
             // 如果要关掉这个扩展，设置为false
-            'enable' => true,
+            'enable' => false,
 
             // 编辑器的配置
             'config' => [
                 // `/upload`接口用来上传文件，上传逻辑要自己实现，可参考下面的`上传图片`
                 'uploadImgServer' => '/upload'
+            ]
+        ],
+
+        'ckeditor' => [
+
+            //Set to false if you want to disable this extension
+            'enable' => true,
+
+            // Editor configuration
+            'config' => [
+                'lang'   => 'zh-CN',
+                'height' => 500,
             ]
         ]
     ],

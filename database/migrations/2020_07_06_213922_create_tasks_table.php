@@ -21,6 +21,7 @@ class CreateTasksTable extends Migration
             $table->string('category')->comment('任务类型');
             $table->timestamp('end')->comment('结束时间');
             $table->string('urgency')->comment('紧急状态');
+            $table->boolean('enable');
             $table->timestamps();
         });
     }

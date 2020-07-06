@@ -33,6 +33,7 @@ class TaskController extends AdminController
         $grid->column('category', __('Category'));
         $grid->column('end', __('End'));
         $grid->column('urgency', __('Urgency'));
+        $grid->column('enable', __('Enable'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -56,6 +57,7 @@ class TaskController extends AdminController
         $show->field('category', __('Category'));
         $show->field('end', __('End'));
         $show->field('urgency', __('Urgency'));
+        $show->field('enable', __('Enable'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -72,7 +74,7 @@ class TaskController extends AdminController
         $form = new Form(new Task());
 
         $form->text('title', __('Title'));
-        $form->editor('content', __('Content'));
+        $form->ckeditor('content', __('Content'));
         $form->text('scope', __('Scope'));
         $form->text('category', __('Category'));
         $form->datetime('end', __('End'))->default(date('Y-m-d H:i:s'));
@@ -81,7 +83,7 @@ class TaskController extends AdminController
             "急" => "急",
             "无" => "无"
         ]);
-
+        $form->switch('enable', __('Enable'));
         return $form;
     }
 }
