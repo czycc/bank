@@ -18,4 +18,7 @@ Route::group([
 
     //任务管理
     $router->resource('tasks', TaskController::class);
+
+    //素材管理
+    $router->resource('materials', MaterialController::class);
 });

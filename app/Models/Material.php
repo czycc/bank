@@ -4,11 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Material extends Model
 {
     protected $guarded = ['id'];
-
-    protected $casts = [
-//        'urgency' => 'datetime'
-    ];
 }
