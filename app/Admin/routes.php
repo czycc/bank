@@ -24,4 +24,7 @@ Route::group([
 
     //内容板块
     $router->resource('onlines', OnlineController::class);
+
+    //抽奖工具
+    $router->resource('draws', DrawController::class);
 });
