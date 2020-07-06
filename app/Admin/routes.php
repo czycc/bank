@@ -15,4 +15,7 @@ Route::group([
 
     //用户管理
     $router->resource('users', UserController::class);
+
+    //任务管理
+    $router->resource('tasks', TaskController::class);
 });

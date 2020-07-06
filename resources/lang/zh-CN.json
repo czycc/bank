@@ -9,5 +9,11 @@
     "Phone": "手机号",
     "Wx avatar" : "微信二维码",
     "Created at": "创建时间",
-    "Updated at": "更新时间"
+    "Updated at": "更新时间",
+    "Title": "标题",
+    "Urgency": "紧急状态",
+    "Content": "任务内容",
+    "Scope": "任务范围",
+    "Category": "类型",
+    "End": "结束时间"
 }
