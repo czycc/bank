@@ -13,4 +13,6 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
 
+    //用户管理
+    $router->resource('users', UserController::class);
 });

@@ -1,0 +1,13 @@
+{
+    "Name" : "姓名",
+    "Job num" : "工号",
+    "Unit" : "单位信息",
+    "Department": "所属部门",
+    "Job" : "工作职务",
+    "Email" : "企业邮箱",
+    "Avatar" : "头像",
+    "Phone": "手机号",
+    "Wx avatar" : "微信二维码",
+    "Created at": "创建时间",
+    "Updated at": "更新时间"
+}
