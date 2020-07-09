@@ -36,4 +36,9 @@ class UserController extends Controller
             'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
         ]);
     }
+
+    public function update()
+    {
+        
+    }
 }
