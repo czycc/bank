@@ -22,15 +22,15 @@ class VerificationCodesController extends Controller
         $code ='0000';
         try {
 
-            $result = $easySms->send($phone, [
-                'content' => "【上汽名爵】您的验证码是{$code}，有效期三分钟",
-            ]);
+//            $result = $easySms->send($phone, [
+//                'content' => "【上汽名爵】您的验证码是{$code}，有效期三分钟",
+//            ]);
         } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $message = $exception->getException('yunpian')->getMessage();
             abort(500, $message ?: '短信发送异常');
         }
 
-        $key = 'verificationCode_'.Str::random(15);
+        $key = 'verificationCode_'. \Str::random(15);
         $expiredAt = now()->addMinutes(3);
         // 缓存验证码 3分钟过期。
         \Cache::put($key, ['phone' => $phone, 'code' => $code], $expiredAt);

@@ -3,7 +3,12 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Illuminate\Support\Arr;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +55,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof  ModelNotFoundException) {
+            return response()->json([
+                'message' => '请求资源不存在'
+            ], 404);
+        } elseif ($exception instanceof  UnauthorizedHttpException) {
+            return response()->json([
+                'message' => '没有权限访问'
+            ], 400);
+        } elseif ($exception instanceof AuthenticationException) {
+            return response()->json([
+                'message' => '授权验证失败'
+            ], 401);
+        } elseif ($exception instanceof ValidationException) {
+            return response()->json([
+                'message' => Arr::first($exception->errors())[0],
+                'errors' => $exception->errors()
+            ], 422);
+        }
+
         return parent::render($request, $exception);
     }
 }
