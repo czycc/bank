@@ -28,11 +28,11 @@ class UserController extends Controller
         $token = \Auth::guard('api')->login($user);
 
         Cache::forget($request->verify_key);
-
+        $user->avatar = config('app.url') . "/" . $user->avatar;
         return response()->json([
             'user' => $user,
             'access_token' => $token,
-            'token_type' => 'Bearer',
+            'token_type' => 'Bearer ',
             'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
         ]);
     }
