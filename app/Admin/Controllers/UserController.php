@@ -64,7 +64,7 @@ class UserController extends AdminController
         $show->field('phone', __('Phone'));
         $show->field('avatar', __('Avatar'));
         $show->field('wx_avatar', __('Wx avatar'));
-//        $show->field('password', __('Password'));
+        $show->field('password', __('Password'));
 //        $show->field('remember_token', __('Remember token'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -90,7 +90,7 @@ class UserController extends AdminController
         $form->mobile('phone', __('Phone'));
         $form->image('avatar', __('Avatar'));
         $form->image('wx_avatar', __('Wx avatar'));
-        $form->password('password', __('Password'));
+        $form->hidden('password', __('Password'))->default('12345678');
 //        $form->text('remember_token', __('Remember token'));
 
         return $form;
