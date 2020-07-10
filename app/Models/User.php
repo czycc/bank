@@ -38,6 +38,11 @@ class User extends Authenticatable implements JWTSubject
 //        'email_verified_at' => 'datetime',
     ];
 
+    public function getAvatarAttribute($v)
+    {
+        return public_path('upload') . '/' . $v;
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
