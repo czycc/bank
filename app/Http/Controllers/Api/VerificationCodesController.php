@@ -18,13 +18,13 @@ class VerificationCodesController extends Controller
             }
         }
         // 生成4位随机数，左侧补0
-//        $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
-        $code ='0000';
+        $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
+//        $code ='0000';
         try {
 //
-//            $result = $easySms->send($phone, [
-//                'content' => "【上汽名爵】您的验证码是{$code}，有效期三分钟",
-//            ]);
+            $result = $easySms->send($phone, [
+                'content' => "【上汽名爵】您的验证码是{$code}，有效期三分钟",
+            ]);
         } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $message = $exception->getException('yunpian')->getMessage();
             abort(500, $message ?: '短信发送异常');
