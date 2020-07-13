@@ -36,8 +36,17 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * 更新用户信息
+     */
     public function update()
     {
 
+    }
+
+
+    public function user(Request $request)
+    {
+        return $request->user();
     }
 }
