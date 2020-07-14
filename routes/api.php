@@ -27,8 +27,11 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function() {
-    //获取用户信息
+    //用户信息
     Route::get('user', 'UserController@user')->name('user.user');
     Route::post('user/update', 'UserController@update')->name('user.update');
     Route::post('upload/image', 'CommonController@uploadImage');
+
+    //素材管理
+    Route::get('material', 'MaterialController@index');
 });
