@@ -44,6 +44,11 @@ class User extends Authenticatable implements JWTSubject
 //        return $v;
     }
 
+    public function getWxAvatarAttribute($v)
+    {
+        return getImgUrl($v);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
