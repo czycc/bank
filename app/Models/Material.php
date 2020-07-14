@@ -12,7 +12,7 @@ class Material extends Model
         if (filter_var($v, FILTER_VALIDATE_URL)) {
             return $v;
         } elseif (!is_null($v)) {
-            return asset($v);
+            return url('upload/' . $v);
         }
     }
 }
