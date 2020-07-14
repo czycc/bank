@@ -15,7 +15,7 @@ class DrawController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Draw';
+    protected $title = '抽奖工具配置';
 
     /**
      * Make a grid builder.
@@ -28,7 +28,7 @@ class DrawController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
-        $grid->column('background', __('Background'));
+        $grid->column('background', __('Background'))->image('', 100, 100);
         $grid->column('info', __('Info'));
         $grid->column('rule', __('Rule'));
         $grid->column('num', __('Num'));
@@ -74,16 +74,16 @@ class DrawController extends AdminController
         $form = new Form(new Draw());
 
         $form->text('title', __('Title'));
-        $form->textarea('background', __('Background'));
+        $form->image('background', __('Background'));
         $form->table('info', __('Info'), function ($form) {
             $form->text('reward', __("Reward"))->rules('required');
             $form->image('reward_bg', "奖品图片")->rules('required');
-            $form->text('odds',__("Odds"))->rules('required|between:0,100');
-            $form->text('stock',__("Stock"))->rules("required|min:0");
-            $form->hidden("out",__("Out"))->default(0);
+            $form->text('odds', __("Odds"))->rules('required|between:0,100');
+            $form->text('stock', __("Stock"))->rules("required|min:0");
+            $form->hidden("out", __("Out"))->default(0);
         });
         $form->ckeditor('rule', __('Rule'));
-        $form->number('num', __('Num'));
+        $form->number('num', __('Num'))->default(1)->rules('required|between:1,1000');
         $form->datetime('end', __('End'))->default(date('Y-m-d H:i:s'));
         $form->switch('enable', __('Enable'));
 

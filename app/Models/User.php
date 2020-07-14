@@ -40,11 +40,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getAvatarAttribute($v)
     {
-        if (filter_var($v, FILTER_VALIDATE_URL)) {
-            return $v;
-        } elseif (!is_null($v)) {
-            return public_path('upload') . '/' . $v;
-        }
+        return getImgUrl($v);
 //        return $v;
     }
 

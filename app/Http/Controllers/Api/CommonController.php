@@ -18,4 +18,10 @@ class CommonController extends Controller
     }
 
 
+    public function options(Request $request)
+    {
+        return response()->json([
+            'value' => option($request->input('key'))
+        ]);
+    }
 }

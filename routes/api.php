@@ -34,4 +34,8 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
 
     //素材管理
     Route::get('material', 'MaterialController@index');
+
+    //获取系统配置
+    Route::get('options', 'CommonController@options');
+
 });

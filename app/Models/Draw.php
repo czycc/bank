@@ -11,4 +11,8 @@ class Draw extends Model
     protected $casts = [
         'info' => 'json',
     ];
+
+    public function getBackgroundAttribute($v) {
+        return getImgUrl($v);
+    }
 }

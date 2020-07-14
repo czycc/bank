@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "appstract/laravel-options": "^5.1",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.0",
         "laravel-admin-ext/ckeditor": "^1.0",
@@ -43,6 +44,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files" : [
+            "app/Helpers/helpers.php"
         ]
     },
     "autoload-dev": {
