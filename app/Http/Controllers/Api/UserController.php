@@ -36,12 +36,20 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * 更新用户信息
-     */
-    public function update()
-    {
 
+    public function update(Request $request)
+    {
+        $attr = [];
+        if ($request->avatar) {
+            $attr['avatar'] = $request->avatar;
+        }
+
+        if ($request->wx_avatar) {
+            $attr['wx_avatar'] = $request->wx_avatar;
+        }
+        $request->user()->update($attr);
+
+        return response()->json($request->user());
     }
 
 

@@ -12,14 +12,21 @@ class UserLoginRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'verify_code' => [
-                'required',
-                'string',
-                'size:4'
-            ],
-            'verify_key' => 'required'
-        ];
+        switch($this->method()) {
+            case 'POST':
+                return [
+                    'verify_code' => [
+                        'required',
+                        'string',
+                        'size:4'
+                    ],
+                    'verify_key' => 'required'
+                ];
+            case 'PATCH':
+                return [
+                ];
+                break;
+        }
     }
 
     public function attributes()

@@ -10,6 +10,12 @@ class CommonController extends Controller
 {
     public function uploadImage(UploadImageRequest $request)
     {
+        $path = $request->file('image')->store('upload', 'public');
 
+        return response()->json([
+            'path' => asset($path)
+        ]);
     }
+
+
 }
