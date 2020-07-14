@@ -17,16 +17,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
+Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     // 短信验证码
     Route::post('verificationCodes', 'VerificationCodesController@store')
         ->name('verificationCodes.store');
 
     //login
     Route::post('login', 'UserController@login')->name('user.login');
+
+    //抽奖列表
+    Route::get('draw/index', 'DrawController@index');
+
+    //抽奖细节
+    Route::get('draw/{id}', 'DrawController@show');
 });
 
-Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function() {
+Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {
     //用户信息
     Route::get('user', 'UserController@user')->name('user.user');
     Route::post('user/update', 'UserController@update')->name('user.update');
