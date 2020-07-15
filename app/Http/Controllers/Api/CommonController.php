@@ -61,42 +61,56 @@ class CommonController extends Controller
 
         $data['tasks'] = [
             [
-                'id' => 1,
-                'category' => '外拓任务',
-                'urgent' => 0,
-                'date' => '2020=06-22'
+                'category_id' => 1,
+                'title' => '外拓任务',
+                'urgency' => 0,
+                'end' => Carbon::now()->toDateString()
             ],[
-                'id' => 2,
-                'category' => '来访任务',
-                'urgent' => 1,
-                'date' => '2020=06-22'
+                'category_id' => 2,
+                'title' => '来访任务',
+                'urgency' => 1,
+                'end' => Carbon::now()->toDateString()
             ],[
-                'id' => 3,
-                'category' => '老带新任务',
-                'urgent' => 0,
-                'date' => '2020=06-22'
+                'category_id' => 3,
+                'title' => '老带新任务',
+                'urgency' => 0,
+                'end' => Carbon::now()->toDateString()
             ], [
-                'id' => 4,
-                'category' => '邀约任务',
-                'urgent' => 1,
-                'date' => '2020=06-22'
+                'category_id' => 4,
+                'title' => '邀约任务',
+                'urgency' => 1,
+                'end' => Carbon::now()->toDateString()
             ],
         ];
 
         //获取对应类目下的活动列表
-        $categories = OnlineCategory::all();
-        foreach ($categories as $category) {
-            $data['onlines'][] = [
-                'id' => $category->id,
-                'name' => $category->name,
-                'data' => Online::where('category_id', $category->id)
-                    ->where('enable', 1)
-                    ->whereDate('end', '>', Carbon::now())
-                    ->orderByDesc('weight')
-                    ->limit(3)
-                    ->get()
-            ];
-        }
+        $data['hots'] = [
+            'category_id' => 1,
+            'data' => Online::where('category_id', 1)
+                ->where('enable', 1)
+                ->whereDate('end', '>', Carbon::now())
+                ->orderByDesc('weight')
+                ->limit(3)
+                ->get()
+        ];
+        $data['products'] = [
+            'category_id' => 2,
+            'data' => Online::where('category_id', 2)
+                ->where('enable', 1)
+                ->whereDate('end', '>', Carbon::now())
+                ->orderByDesc('weight')
+                ->limit(3)
+                ->get()
+        ];
+        $data['courses'] = [
+            'category_id' => 2,
+            'data' => Online::where('category_id', 2)
+                ->where('enable', 1)
+                ->whereDate('end', '>', Carbon::now())
+                ->orderByDesc('weight')
+                ->limit(3)
+                ->get()
+        ];
 
         //素材中心
         $data['materials'] = Material::orderByDesc('weight')->limit(6)->get();

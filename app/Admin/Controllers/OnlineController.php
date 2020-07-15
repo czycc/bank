@@ -78,6 +78,7 @@ class OnlineController extends AdminController
 
         $form->text('title', __('Title'));
         $form->ckeditor('content', __('Content'));
+        $form->image('banner', 'banner图');
         $form->select('scope_id', __('Scope'))->options(function () {
             $scope = Scope::all();
             $option = [];

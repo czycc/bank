@@ -33,6 +33,9 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
     //首页数据
     Route::get('home', 'CommonController@home');
+
+    //线上内容
+    Route::get('online', 'OnlineController@index');
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {

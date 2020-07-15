@@ -8,5 +8,9 @@ class Online extends Model
 {
     protected $guarded = ['id'];
 
-
+    public function getBannerAttribute($v)
+    {
+        return getImgUrl($v);
+//        return $v;
+    }
 }
