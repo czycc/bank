@@ -28,5 +28,6 @@ Route::group([
     //抽奖工具
     $router->resource('draws', DrawController::class);
 
+    //抽奖规则
     $router->get('draw_rule', DrawForm::class);
 });

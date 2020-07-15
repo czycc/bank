@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Online extends Model
+class OnlineCategory extends Model
 {
     protected $guarded = ['id'];
 
-
+    public $timestamps = false;
 }

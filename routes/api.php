@@ -30,6 +30,9 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
     //抽奖细节
     Route::get('draw/{id}', 'DrawController@show');
+
+    //首页数据
+    Route::get('home', 'CommonController@home');
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {

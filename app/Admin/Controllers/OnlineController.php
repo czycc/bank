@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Online;
+use App\Models\OnlineCategory;
+use App\Models\Scope;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -29,10 +31,13 @@ class OnlineController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
         $grid->column('content', __('Content'));
-        $grid->column('scope', __('Scope'));
-        $grid->column('board', __('Board'));
+        $grid->column('scope_id', __('Scope'));
+        $grid->column('category_id', __('Board'));
         $grid->column('end', __('End'));
-        $grid->column('enable', __('Enable'));
+        $grid->column('enable', __('Enable'))->using([
+            0 => '否',
+            1 => '是'
+        ]);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -52,8 +57,8 @@ class OnlineController extends AdminController
         $show->field('id', __('Id'));
         $show->field('title', __('Title'));
         $show->field('content', __('Content'));
-        $show->field('scope', __('Scope'));
-        $show->field('board', __('Board'));
+        $show->field('scope_id', __('Scope'));
+        $show->field('category_id', __('Board'));
         $show->field('end', __('End'));
         $show->field('enable', __('Enable'));
         $show->field('created_at', __('Created at'));
@@ -73,12 +78,22 @@ class OnlineController extends AdminController
 
         $form->text('title', __('Title'));
         $form->ckeditor('content', __('Content'));
-        $form->select('scope', __('Scope'))->options([
-            "全体支行" => "全体支行"
-        ]);
-        $form->select('board', __('Board'))->options([
-            "热门活动" => "热门活动"
-        ]);
+        $form->select('scope_id', __('Scope'))->options(function () {
+            $scope = Scope::all();
+            $option = [];
+            foreach ($scope as $item) {
+                $option[$item->id] = $item->name;
+            }
+            return $option;
+        });
+        $form->select('category_id', __('Board'))->options(function () {
+                $cates = OnlineCategory::all();
+                $option = [];
+                foreach ($cates as $item) {
+                    $option[$item->id] = $item->name;
+                }
+                return $option;
+            });
         $form->datetime('end', __('End'))->default(date('Y-m-d H:i:s'));
         $form->switch('enable', __('Enable'));
 
