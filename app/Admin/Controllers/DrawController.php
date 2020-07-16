@@ -26,6 +26,11 @@ class DrawController extends AdminController
     {
         $grid = new Grid(new Draw());
 
+        $grid->actions(function ($actions) {
+//            $actions->disableDelete();
+                $actions->disableEdit();
+        });
+
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
         $grid->column('background', __('Background'))->image('', 100, 100);
@@ -53,7 +58,7 @@ class DrawController extends AdminController
         $show->field('id', __('Id'));
         $show->field('title', __('Title'));
         $show->field('background', __('Background'));
-        $show->field('info', __('Info'));
+//        $show->field('info', __('Info'));
         $show->field('rule', __('Rule'));
         $show->field('num', __('Num'));
         $show->field('end', __('End'));
