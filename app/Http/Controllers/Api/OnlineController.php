@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Online;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -28,5 +29,20 @@ class OnlineController extends Controller
         $online = Online::find($id);
 
         return response()->json($online);
+    }
+
+    public function share(User $user, Online $online)
+    {
+        return response()->json([
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'phone' => $user->phone,
+                'unit' => $user->unit,
+                'avatar' => $user->avatar
+            ],
+            'online' => $online,
+            'is_open' => $online->end < Carbon::now()
+        ]);
     }
 }
