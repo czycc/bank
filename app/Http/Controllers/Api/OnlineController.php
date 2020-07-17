@@ -27,7 +27,6 @@ class OnlineController extends Controller
     {
         $online = Online::find($id);
 
-        dd($online);
         return response()->json($online);
     }
 }
