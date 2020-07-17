@@ -103,8 +103,8 @@ class CommonController extends Controller
                 ->get()
         ];
         $data['courses'] = [
-            'category_id' => 2,
-            'data' => Online::where('category_id', 2)
+            'category_id' => 3,
+            'data' => Online::where('category_id', 3)
                 ->where('enable', 1)
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
