@@ -60,8 +60,8 @@ class OutTaskController extends Controller
         if (
             !OutTask::where('id', $request->out_task_id)
             ->where('enable', 1)
-            ->whereDate('start', '<', Carbon::now())
-            ->whereDate('end', '>', Carbon::now())
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
             ->first()
         ) {
             abort(400, '很抱歉，活动已经结束');
@@ -73,6 +73,8 @@ class OutTaskController extends Controller
             'out_task_id' => $request->out_task_id,
             'phone' => $data['phone']
         ]);
+
+        Cache::forget($request->verify_key);
 
         return response()->json([
             'status' => true
