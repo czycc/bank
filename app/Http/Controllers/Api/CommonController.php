@@ -7,6 +7,7 @@ use App\Http\Requests\Api\UploadImageRequest;
 use App\Models\Material;
 use App\Models\Online;
 use App\Models\OnlineCategory;
+use App\Models\OutTask;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -59,18 +60,28 @@ class CommonController extends Controller
     {
         $data = [];
 
+        $out_task = OutTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+            ->where('enable', 1)
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
+            ->orderByDesc('urgency')
+            ->orderByDesc('created_at')
+            ->first();
         $data['tasks'] = [
+//            [
+//                'category_id' => 1,
+//                'id' => $out_task->id,
+//                'title' => $out_task->title,
+//                'urgency' => $out_task->urgency,
+//                'end' => $out_task->end
+//            ],
             [
-                'category_id' => 1,
-                'title' => '外拓任务',
-                'urgency' => 0,
-                'end' => Carbon::now()->toDateString()
-            ],[
                 'category_id' => 2,
+                'id' => $out_task->id,
                 'title' => '来访任务',
                 'urgency' => 1,
                 'end' => Carbon::now()->toDateString()
-            ],[
+            ], [
                 'category_id' => 3,
                 'title' => '老带新任务',
                 'urgency' => 0,

@@ -33,6 +33,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
     //首页数据
     Route::get('home', 'CommonController@home');
+
     //分享活动信息
     Route::get('share/user/{user}/online/{online}', 'OnlineController@share');
 
