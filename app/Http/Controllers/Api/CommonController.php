@@ -119,4 +119,14 @@ class CommonController extends Controller
             $data
         );
     }
+
+    public function qrcode(Request $request)
+    {
+        $this->validate($request, [
+            'text' => 'required|string|between:1,200'
+        ]);
+
+        return \QrCode::encoding('UTF-8')->format('png')->generate('test');
+
+    }
 }

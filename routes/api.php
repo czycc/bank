@@ -54,4 +54,9 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
     Route::get('online', 'OnlineController@index');
     Route::get('online/{id}', 'OnlineController@show');
 
+    //拓客任务
+    Route::get('out_task', 'OutTaskController@index');
+    Route::get('out_task/{id}', 'OutTaskController@show');
+
+
 });

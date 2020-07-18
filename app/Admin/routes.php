@@ -30,4 +30,7 @@ Route::group([
 
     //抽奖规则
     $router->get('draw_rule', DrawForm::class);
+
+    //拓客任务
+    $router->resource('out-tasks', OutTaskController::class);
 });
