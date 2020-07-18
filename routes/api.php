@@ -36,6 +36,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     //分享活动信息
     Route::get('share/user/{user}/online/{online}', 'OnlineController@share');
 
+    //拓客任务完成
+    Route::post('out_task/store', 'OutTaskController@store');
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {

@@ -15,8 +15,13 @@ class CreateOutTasksTable extends Migration
     {
         Schema::create('out_tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-
+            $table->string('title')->comment('任务标题');
+            $table->text('content')->comment('任务内容富文本');
+            $table->string('scope')->comment('任务范围');
+            $table->dateTime('start')->comment('开始时间');
+            $table->dateTime('end')->comment('结束时间');
+            $table->string('urgency')->comment('紧急状态');
+            $table->boolean('enable');
             $table->timestamps();
         });
     }

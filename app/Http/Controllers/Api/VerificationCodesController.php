@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\VerificationCodeRequest;
+use App\Models\OutTaskUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Overtrue\EasySms\EasySms;
@@ -15,6 +16,11 @@ class VerificationCodesController extends Controller
         if ($request->category == 'login') {
             if (!User::where('phone', $phone)->first()) {
                 abort(400, '用户手机号不存在');
+            }
+        } elseif ($request->category == 'out_task') {
+            //外拓任务
+            if (OutTaskUser::where('phone', $phone)->first()) {
+                abort(400, '您已经参与过拓客任务');
             }
         }
         // 生成4位随机数，左侧补0
