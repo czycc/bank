@@ -17,8 +17,8 @@ class OutTaskController extends Controller
     {
         $tasks = OutTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
-            ->whereDate('start', '<', Carbon::now())
-            ->whereDate('end', '>', Carbon::now())
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->limit(10)
