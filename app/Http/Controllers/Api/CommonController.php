@@ -10,6 +10,7 @@ use App\Models\OnlineCategory;
 use App\Models\OutTask;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 
 class CommonController extends Controller
 {
@@ -136,8 +137,12 @@ class CommonController extends Controller
         $this->validate($request, [
             'text' => 'required|string|between:1,200'
         ]);
-
-        return \QrCode::encoding('UTF-8')->format('png')->generate('test');
+        $qrcode = \QrCode::format('png')
+            ->encoding('UTF-8')
+            ->size('400')
+            ->margin(2)
+            ->generate($request->text);
+        return Image::make($qrcode)->response();
 
     }
 }
