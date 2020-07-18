@@ -10,7 +10,7 @@ use App\Models\OnlineCategory;
 use App\Models\OutTask;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
+use Intervention\Image\Facades\Image;
 
 class CommonController extends Controller
 {
