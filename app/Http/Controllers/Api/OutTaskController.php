@@ -21,8 +21,7 @@ class OutTaskController extends Controller
             ->where('end', '>', Carbon::now())
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
-            ->limit(10)
-            ->get();
+            ->paginate(10);
 
         return response()->json($tasks);
     }

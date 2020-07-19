@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\NewTaskRequest;
 use App\Http\Requests\Api\VisitTaskRequest;
-use App\Models\OutTask;
-use App\Models\OutTaskUser;
-use App\Models\User;
+use App\Models\NewTask;
+use App\Models\NewTaskUser;
 use App\Models\VisitTask;
 use App\Models\VisitTaskUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class VisitTaskController extends Controller
+class NewTaskController extends Controller
 {
     public function index()
     {
-        $tasks = VisitTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+        $tasks = NewTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
@@ -28,12 +28,12 @@ class VisitTaskController extends Controller
         return response()->json($tasks);
     }
 
-    public function show(VisitTask $task)
+    public function show(NewTask $task)
     {
         return response()->json($task);
     }
 
-    public function store(VisitTaskRequest $request)
+    public function store(NewTaskRequest $request)
     {
         //获取验证码
         $data = Cache::get($request->verify_key);
@@ -49,7 +49,7 @@ class VisitTaskController extends Controller
         }
 
         if (
-        !VisitTask::where('id', $request->visit_task_id)
+        !NewTask::where('id', $request->new_task_id)
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
@@ -59,12 +59,14 @@ class VisitTaskController extends Controller
         }
 
         //保存
-        VisitTaskUser::create([
+        NewTaskUser::create([
             'user_id' => $request->user()->id,
-            'visit_task_id' => $request->visit_task_id,
-            'phone' => $data['phone'],
+            'new_task_id' => $request->new_task_id,
+            'old_phone' => $request->old_phone,
+            'new_phone' => $data['phone'],
             'comment' => $request->comment,
-            'username' => $request->username
+            'old_username' => $request->old_username,
+            'new_username' => $request->new_username
         ]);
 
 //        Cache::forget($request->verify_key);

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\InviteTaskRequest;
 use App\Http\Requests\Api\VisitTaskRequest;
-use App\Models\OutTask;
-use App\Models\OutTaskUser;
+use App\Models\InviteTask;
+use App\Models\InviteTaskUser;
 use App\Models\User;
 use App\Models\VisitTask;
 use App\Models\VisitTaskUser;
@@ -13,11 +14,11 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class VisitTaskController extends Controller
+class InviteTaskController extends Controller
 {
     public function index()
     {
-        $tasks = VisitTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+        $tasks = InviteTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
@@ -28,12 +29,12 @@ class VisitTaskController extends Controller
         return response()->json($tasks);
     }
 
-    public function show(VisitTask $task)
+    public function show(InviteTask $task)
     {
         return response()->json($task);
     }
 
-    public function store(VisitTaskRequest $request)
+    public function store(InviteTaskRequest $request)
     {
         //获取验证码
         $data = Cache::get($request->verify_key);
@@ -49,7 +50,7 @@ class VisitTaskController extends Controller
         }
 
         if (
-        !VisitTask::where('id', $request->visit_task_id)
+        !InviteTask::where('id', $request->invite_task_id)
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
@@ -58,13 +59,14 @@ class VisitTaskController extends Controller
             abort(400, '很抱歉，活动已经结束');
         }
 
+        if (!User::find($request->user_id)) {
+            abort(400, '不合法的业务员id');
+        }
         //保存
-        VisitTaskUser::create([
-            'user_id' => $request->user()->id,
-            'visit_task_id' => $request->visit_task_id,
+        InviteTaskUser::create([
+            'user_id' => $request->user_id,
+            'invite_task_id' => $request->invite_task_id,
             'phone' => $data['phone'],
-            'comment' => $request->comment,
-            'username' => $request->username
         ]);
 
 //        Cache::forget($request->verify_key);

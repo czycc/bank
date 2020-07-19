@@ -37,4 +37,9 @@ Route::group([
     //来访任务
     $router->resource('visit-tasks', VisitTaskController::class);
 
+    //老带新
+    $router->resource('new-tasks', NewTaskController::class);
+
+    //邀约任务
+    $router->resource('invite-tasks', InviteTaskController::class);
 });
