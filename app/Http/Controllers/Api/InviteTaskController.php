@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 
 class InviteTaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $tasks = InviteTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
@@ -25,7 +25,11 @@ class InviteTaskController extends Controller
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->paginate(10);
-
+        foreach ($tasks as $task) {
+            $task->finish = InviteTaskUser::where('user_id', $request->user()->id)
+                ->where('invite_task_id', $task->id)
+                ->count();
+        }
         return response()->json($tasks);
     }
 
