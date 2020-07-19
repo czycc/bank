@@ -30,9 +30,9 @@ class OnlineController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
-        $grid->column('content', __('Content'));
-        $grid->column('scope_id', __('Scope'));
-        $grid->column('category_id', __('Board'));
+//        $grid->column('content', __('Content'));
+        $grid->column('scope.name', __('Scope'));
+        $grid->column('category.name', __('Board'));
         $grid->column('end', __('End'));
         $grid->column('enable', __('Enable'))->using([
             0 => '否',

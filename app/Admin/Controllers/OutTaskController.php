@@ -28,14 +28,21 @@ class OutTaskController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
-        $grid->column('content', __('Content'));
-        $grid->column('scope', __('Scope'));
+//        $grid->column('content', __('Content'));
+//        $grid->column('scope', __('Scope'));
         $grid->column('start', __('Start'));
         $grid->column('end', __('End'));
-        $grid->column('urgency', __('Urgency'));
-        $grid->column('enable', __('Enable'));
+        $grid->column('urgency', __('Urgency'))->using([
+            0 => '普通',
+            1 => '急',
+            2 => '特急'
+        ]);
+        $grid->column('enable', __('Enable'))->using([
+            0 => '关闭',
+            1 => '开启'
+        ]);
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+//        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -73,12 +80,18 @@ class OutTaskController extends AdminController
     {
         $form = new Form(new OutTask());
 
-        $form->text('title', __('Title'));
-        $form->ckeditor('content', __('Content'));
-        $form->text('scope', __('Scope'));
+        $form->text('title', __('Title'))->rules('required');
+        $form->ckeditor('content', __('Content'))->rules('required');
+        $form->select('scope', __('Scope'))->options([
+            '全体支行' => '全体支行'
+        ])->default('全体支行');
         $form->datetime('start', __('Start'))->default(date('Y-m-d H:i:s'));
         $form->datetime('end', __('End'))->default(date('Y-m-d H:i:s'));
-        $form->text('urgency', __('Urgency'));
+        $form->text('urgency', __('Urgency'))->options([
+            0 => '普通',
+            1 => '急',
+            2 => '特急'
+        ])->default(0);
         $form->switch('enable', __('Enable'));
 
         return $form;

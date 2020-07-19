@@ -23,6 +23,17 @@ class Online extends Model
     {
         return Carbon::create($this->end)->toDateString();
     }
+
+    public function category()
+    {
+        return $this->belongsTo(OnlineCategory::class, 'category_id');
+    }
+
+    public function scope()
+    {
+        return $this->belongsTo(Scope::class, 'scope_id');
+    }
+
     public static function boot()
     {
         parent::boot();
