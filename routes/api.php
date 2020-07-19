@@ -29,7 +29,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     Route::get('draw/index', 'DrawController@index');
 
     //抽奖细节
-    Route::get('draw/{id}', 'DrawController@show');
+    Route::get('draw/{draw}', 'DrawController@show');
 
     //首页数据
     Route::get('home', 'CommonController@home');

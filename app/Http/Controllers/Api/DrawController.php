@@ -22,15 +22,14 @@ class DrawController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Draw $draw
      * @return \Illuminate\Http\JsonResponse
-     *
      * 显示抽奖活动
      */
-    public function show($id)
+    public function show(Draw $draw)
     {
-        $item = Draw::find($id);
+        $draw->draw_items = $draw->items;
 
-        return response()->json($item);
+        return response()->json($draw);
     }
 }
