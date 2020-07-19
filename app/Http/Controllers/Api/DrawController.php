@@ -116,7 +116,7 @@ class DrawController extends Controller
             ->limit(10)
             ->get();
         foreach ($items as $item) {
-            $item->reward = $item->draw_item->reward;
+            $item->reward = DrawItem::find($item->draw_item_id)->reward;
             $item->draw_title = $item->draw->title;
         }
 
