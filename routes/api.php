@@ -42,6 +42,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
     //邀约任务
     Route::post('invite_task/store', 'InviteTaskController@store');
+    Route::get('invite_task/{task}', 'InviteTaskController@show');
 
 });
 
@@ -77,5 +78,4 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
 
     //邀约任务
     Route::get('invite_task', 'InviteTaskController@index');
-    Route::get('invite_task/{task}', 'InviteTaskController@show');
 });
