@@ -35,7 +35,7 @@ class DrawController extends AdminController
         $grid->column('title', __('Title'));
         $grid->column('background', __('Background'))->image('', 100, 100);
         $grid->column('info', __('Info'));
-        $grid->column('rule', __('Rule'));
+//        $grid->column('rule', __('Rule'));
         $grid->column('num', __('Num'));
         $grid->column('end', __('End'));
         $grid->column('enable', __('Enable'));
@@ -80,9 +80,9 @@ class DrawController extends AdminController
 
         $form->text('title', __('Title'));
         $form->image('background', __('Background'));
-        $form->table('info', __('Info'), function ($form) {
+        $form->hasMany('items', '奖品', function (Form\NestedForm $form) {
             $form->text('reward', __("Reward"))->rules('required');
-            $form->image('reward_bg', "奖品图片")->rules('required');
+            $form->image('reward_bg', "奖品图片")->rules('');
             $form->text('odds', __("Odds"))->rules('required|between:0,100');
             $form->text('stock', __("Stock"))->rules("required|min:0");
             $form->hidden("out", __("Out"))->default(0);
