@@ -27,10 +27,8 @@ class OutTaskController extends Controller
         return response()->json($tasks);
     }
 
-    public function show($id)
+    public function show(OutTask $task)
     {
-        $task = OutTask::find($id);
-
         return response()->json($task);
     }
 

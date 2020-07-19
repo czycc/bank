@@ -28,10 +28,8 @@ class VisitTaskController extends Controller
         return response()->json($tasks);
     }
 
-    public function show($id)
+    public function show(VisitTask $task)
     {
-        $task = VisitTask::find($id);
-
         return response()->json($task);
     }
 
