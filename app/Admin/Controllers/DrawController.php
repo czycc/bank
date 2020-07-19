@@ -28,14 +28,14 @@ class DrawController extends AdminController
 
         $grid->actions(function ($actions) {
 //            $actions->disableDelete();
-                $actions->disableEdit();
+//                $actions->disableEdit();
         });
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
         $grid->column('background', __('Background'))->image('', 100, 100);
-        $grid->column('info', __('Info'));
-//        $grid->column('rule', __('Rule'));
+//        $grid->column('info', __('Info'));
+        $grid->column('rule', __('Rule'));
         $grid->column('num', __('Num'));
         $grid->column('end', __('End'));
         $grid->column('enable', __('Enable'));
