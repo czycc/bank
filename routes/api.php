@@ -39,6 +39,10 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
     //拓客任务完成
     Route::post('out_task/store', 'OutTaskController@store');
+
+    //邀约任务
+    Route::post('invite_task/store', 'InviteTaskController@store');
+
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {
@@ -65,4 +69,13 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
     Route::get('visit_task', 'VisitTaskController@index');
     Route::get('visit_task/{task}', 'VisitTaskController@show');
     Route::post('visit_task/store', 'VisitTaskController@store');
+
+    //老带新任务
+    Route::get('new_task', 'NewTaskController@index');
+    Route::get('new_task/{task}', 'NewTaskController@show');
+    Route::post('new_task/store', 'NewTaskController@store');
+
+    //邀约任务
+    Route::get('invite_task', 'InviteTaskController@index');
+    Route::get('invite_task/{task}', 'InviteTaskController@show');
 });
