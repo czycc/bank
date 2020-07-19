@@ -7,6 +7,7 @@ use App\Http\Requests\Api\DrawItemRequest;
 use App\Models\Draw;
 use App\Models\DrawItem;
 use App\Models\DrawItemUser;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
