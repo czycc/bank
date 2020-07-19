@@ -19,7 +19,8 @@ class CreateDrawItemUsersTable extends Migration
             $table->unsignedBigInteger('draw_item_id');
             $table->unsignedBigInteger('draw_id');
             $table->string('phone');
-            $table->string('verify')->default(0);
+            $table->integer('verify')->default(0);
+            $table->unsignedInteger('verify_user_id')->nullable()->comment('核销人');
             $table->timestamps();
         });
     }

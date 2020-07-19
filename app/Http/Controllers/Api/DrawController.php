@@ -108,4 +108,45 @@ class DrawController extends Controller
             'draw_key' => $key
         ]);
     }
+
+    public function verifyList(Request $request)
+    {
+        $items = DrawItemUser::where('phone', $request->phone)
+            ->orderBy('verify')
+            ->limit(10)
+            ->get();
+        foreach ($items as $item) {
+            $item->reward = $item->draw_item->reward;
+            $item->draw_title = $item->draw->title;
+        }
+
+        return response()->json($items);
+    }
+
+    public function verifyStore(Request $request)
+    {
+        //获取验证码
+        $data = Cache::get($request->verify_key);
+
+        if (!$data) {
+            abort(400, '验证码已过期，请重新发送');
+        }
+
+        if (!hash_equals($data['code'], $request->verify_code)) {
+            // 返回401
+            abort(400, '验证码不符合');
+        }
+
+        $v = DrawItemUser::find($request->draw_item_user_id);
+        if ($v->phone !== $data['phone']) {
+            abort(400, '手机号不对呀');
+        }
+        $v->verify = 1;
+        $v->verify_id = $request->user()->id;
+        $v->save();
+
+        return response()->json([
+            'message' => '核销成功'
+        ]);
+    }
 }

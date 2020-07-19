@@ -82,4 +82,8 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
 
     //邀约任务
     Route::get('invite_task', 'InviteTaskController@index');
+
+    //核销
+    Route::get('verify/list', 'DrawController@verifyList');
+    Route::post('verify/store', 'DrawController@verifyStore');
 });
