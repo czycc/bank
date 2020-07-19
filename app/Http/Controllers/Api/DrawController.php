@@ -32,4 +32,21 @@ class DrawController extends Controller
 
         return response()->json($draw);
     }
+
+    public function drawItem(Draw $draw)
+    {
+        $items = $draw->items;
+
+        $ids[] = 0;
+
+        foreach ($items as $item) {
+            $ids[] = $item->id;
+        }
+
+        $a = array_rand($ids);
+
+        return response()->json([
+            'id' => $a
+        ]);
+    }
 }
