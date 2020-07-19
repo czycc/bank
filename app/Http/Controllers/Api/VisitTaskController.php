@@ -33,7 +33,7 @@ class VisitTaskController extends Controller
         return response()->json($task);
     }
 
-    public function store(Request $request)
+    public function store(VisitTask $request)
     {
         //获取验证码
         $data = Cache::get($request->verify_key);
