@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\OutTask;
+use App\Models\VisitTask;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class OutTaskController extends AdminController
+class VisitTaskController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'OutTask';
+    protected $title = 'VisitTask';
 
     /**
      * Make a grid builder.
@@ -24,7 +24,7 @@ class OutTaskController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new OutTask());
+        $grid = new Grid(new VisitTask());
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
@@ -48,7 +48,7 @@ class OutTaskController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(OutTask::findOrFail($id));
+        $show = new Show(VisitTask::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('title', __('Title'));
@@ -71,7 +71,7 @@ class OutTaskController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new OutTask());
+        $form = new Form(new VisitTask());
 
         $form->text('title', __('Title'));
         $form->ckeditor('content', __('Content'));
