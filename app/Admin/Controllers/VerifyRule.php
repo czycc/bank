@@ -36,7 +36,7 @@ class VerifyRule extends Form
      */
     public function form()
     {
-        $this->ckeditor('verify_rule')->rules('verify_rule');
+        $this->ckeditor('verify_rule')->rules('required');
     }
 
     /**
