@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UploadImageRequest;
+use App\Models\InviteTask;
 use App\Models\Material;
+use App\Models\NewTask;
 use App\Models\Online;
 use App\Models\OnlineCategory;
 use App\Models\OutTask;
+use App\Models\VisitTask;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -61,39 +64,34 @@ class CommonController extends Controller
     {
         $data = [];
 
-        $out_task = OutTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+        $data['out_task'] = OutTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
-        $data['tasks'] = [
-//            [
-//                'category_id' => 1,
-//                'id' => $out_task->id,
-//                'title' => $out_task->title,
-//                'urgency' => $out_task->urgency,
-//                'end' => $out_task->end
-//            ],
-            [
-                'category_id' => 2,
-                'id' => $out_task->id,
-                'title' => '来访任务',
-                'urgency' => 1,
-                'end' => Carbon::now()->toDateString()
-            ], [
-                'category_id' => 3,
-                'title' => '老带新任务',
-                'urgency' => 0,
-                'end' => Carbon::now()->toDateString()
-            ], [
-                'category_id' => 4,
-                'title' => '邀约任务',
-                'urgency' => 1,
-                'end' => Carbon::now()->toDateString()
-            ],
-        ];
+        $data['visit_task'] = VisitTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+            ->where('enable', 1)
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
+            ->orderByDesc('urgency')
+            ->orderByDesc('created_at')
+            ->first();
+        $data['new_task'] = NewTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+            ->where('enable', 1)
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
+            ->orderByDesc('urgency')
+            ->orderByDesc('created_at')
+            ->first();
+        $data['invite_task'] = InviteTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
+            ->where('enable', 1)
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
+            ->orderByDesc('urgency')
+            ->orderByDesc('created_at')
+            ->first();
 
         //获取对应类目下的活动列表
         $data['hots'] = [
