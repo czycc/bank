@@ -50,7 +50,7 @@ class VisitTaskController extends Controller
         }
 
         if (
-        !VisitTask::where('id', $request->out_task_id)
+        !VisitTask::where('id', $request->visit_task_id)
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
