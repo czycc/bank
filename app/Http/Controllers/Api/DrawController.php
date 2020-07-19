@@ -143,7 +143,7 @@ class DrawController extends Controller
             abort(400, '手机号不对呀');
         }
         $v->verify = 1;
-        $v->verify_id = $request->user()->id;
+        $v->verify_user_id = $request->user()->id;
         $v->save();
 
         return response()->json([
