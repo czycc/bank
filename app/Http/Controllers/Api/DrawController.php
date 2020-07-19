@@ -39,21 +39,31 @@ class DrawController extends Controller
         return response()->json($draw);
     }
 
-    public function drawItem(Draw $draw)
+    public function drawItem(Request $request)
     {
-        $items = $draw->items;
-
-        $ids[] = 0;
-
-        foreach ($items as $item) {
-            $ids[] = $item->id;
+        $data = Cache::get($request->draw_key);
+        if (!$data) {
+            abort(400, '您的验证已失效，请重新发送验证码');
         }
 
-        $a = array_rand($ids);
+        $draw = Draw::find($data['draw_id']);
 
-        return response()->json([
-            'id' => $a
+        $a[] = 0;
+
+        foreach ($draw->items as $item) {
+            $a[] = $item->id;
+        }
+
+        $draw_item_id = array_rand($a);
+
+        $i = DrawItemUser::create([
+            'phone' => $data['phone'],
+            'user_id' => $data['user_id'],
+            'draw_item_id' => $draw_item_id,
+            'draw_id' => $data['draw_id']
         ]);
+
+        return response()->json($i);
     }
 
     public function store(DrawItemRequest $request)
@@ -70,34 +80,32 @@ class DrawController extends Controller
             abort(400, '验证码不符合');
         }
 
-        if ($request->draw_item_id == 0) {
-            return response()->json([
-                'message' => '验证成功，很遗憾你未中奖'
-            ]);
-        }
 
         if (
-        !$item = DrawItem::where('id', $request->draw_item_id)
+        !$item = Draw::where('id', $request->draw_id)
+            ->where('enable', 1)
             ->first()
         ) {
-            abort(400, '奖品不存在');
+            abort(400, '抽奖活动已结束');
         }
 
         if (!User::find($request->user_id)) {
             abort(400, '不合法的业务员id');
         }
         //保存
-        DrawItemUser::create([
-            'user_id' => $request->user_id,
-            'draw_item_id' => $request->draw_item_id,
-            'draw_id' => $item->draw_id,
+        $key = 'draw_'.\Str::random(15);
+        $expiredAt = now()->addMinutes(30);
+        \Cache::put($key, [
             'phone' => $data['phone'],
-        ]);
+            'user_id' => $request->user_id,
+            'draw_id' => $request->draw_id
+        ], $expiredAt);
 
-//        Cache::forget($request->verify_key);
+        Cache::forget($request->verify_key);
 
         return response()->json([
-            'message' => '验证成功，奖品信息已录入'
+            'message' => '验证成功，请进行抽奖',
+            'draw_key' => $key
         ]);
     }
 }

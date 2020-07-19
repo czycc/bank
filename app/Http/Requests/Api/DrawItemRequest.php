@@ -14,7 +14,7 @@ class DrawItemRequest extends FormRequest
                 'size:4'
             ],
             'verify_key' => 'required',
-            'draw_item_id' => 'required',
+            'draw_id' => 'required',
             'user_id' => 'required|exists:users,id'
         ];
     }
