@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\VisitTaskRequest;
 use App\Models\OutTask;
 use App\Models\OutTaskUser;
 use App\Models\User;
@@ -33,7 +34,7 @@ class VisitTaskController extends Controller
         return response()->json($task);
     }
 
-    public function store(VisitTask $request)
+    public function store(VisitTaskRequest $request)
     {
         //获取验证码
         $data = Cache::get($request->verify_key);
