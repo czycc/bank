@@ -31,7 +31,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     //抽奖细节
     Route::get('draw/{draw}', 'DrawController@show');
     Route::get('draw_item/{draw}', 'DrawController@drawItem');
-
+    Route::post('draw/store', 'DrawController@store');
     //首页数据
     Route::get('home', 'CommonController@home');
 
