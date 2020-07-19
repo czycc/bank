@@ -31,6 +31,9 @@ Route::group([
     //抽奖规则
     $router->get('draw_rule', DrawForm::class);
 
+    //核销规则
+    $router->get('verify_rule', VerifyRule::class);
+
     //拓客任务
     $router->resource('out-tasks', OutTaskController::class);
 
