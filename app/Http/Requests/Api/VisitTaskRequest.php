@@ -19,7 +19,7 @@ class VisitTaskRequest extends FormRequest
                 'size:4'
             ],
             'verify_key' => 'required',
-            'visit_task_id' => 'required',
+            'visit_task_id' => 'required|exists:visit_tasks,id',
             'username' => 'required',
             'comment' => 'required'
         ];
