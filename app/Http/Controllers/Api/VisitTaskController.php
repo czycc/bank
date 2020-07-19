@@ -62,7 +62,7 @@ class VisitTaskController extends Controller
         //保存
         VisitTaskUser::create([
             'user_id' => $request->user()->id,
-            'visit_task_id' => $request->out_task_id,
+            'visit_task_id' => $request->visit_task_id,
             'phone' => $data['phone'],
             'comment' => $request->comment,
             'username' => $request->username
