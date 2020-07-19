@@ -35,6 +35,6 @@ Route::group([
     $router->resource('out-tasks', OutTaskController::class);
 
     //来访任务
-//    $router->resource('visit-tasks', VisitTaskController::class);
+    $router->resource('visit-tasks', VisitTaskController::class);
 
 });
