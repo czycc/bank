@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\InviteTaskRequest;
-use App\Http\Requests\Api\VisitTaskRequest;
 use App\Models\InviteTask;
 use App\Models\InviteTaskUser;
 use App\Models\User;
-use App\Models\VisitTask;
-use App\Models\VisitTaskUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;

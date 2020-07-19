@@ -4,18 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\NewTaskRequest;
-use App\Http\Requests\Api\VisitTaskRequest;
 use App\Models\NewTask;
 use App\Models\NewTaskUser;
-use App\Models\VisitTask;
-use App\Models\VisitTaskUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class NewTaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $tasks = NewTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
@@ -24,7 +21,11 @@ class NewTaskController extends Controller
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->paginate(10);
-
+        foreach ($tasks as $task) {
+            $task->finish = NewTaskUser::where('user_id', $request->user()->id)
+                ->where('new_task_id', $task->id)
+                ->count();
+        }
         return response()->json($tasks);
     }
 

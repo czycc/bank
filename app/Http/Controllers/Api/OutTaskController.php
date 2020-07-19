@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\OutTaskRequest;
+use App\Models\InviteTaskUser;
 use App\Models\OutTask;
 use App\Models\OutTaskUser;
 use App\Models\User;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Cache;
 
 class OutTaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $tasks = OutTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
@@ -22,7 +23,11 @@ class OutTaskController extends Controller
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->paginate(10);
-
+        foreach ($tasks as $task) {
+            $task->finish = OutTaskUser::where('user_id', $request->user()->id)
+                ->where('out_task_id', $task->id)
+                ->count();
+        }
         return response()->json($tasks);
     }
 

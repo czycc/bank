@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 
 class VisitTaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $tasks = VisitTask::select(['id', 'title', 'urgency', 'start', 'end', 'enable'])
             ->where('enable', 1)
@@ -24,7 +24,11 @@ class VisitTaskController extends Controller
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->paginate(10);
-
+        foreach ($tasks as $task) {
+            $task->finish = VisitTaskUser::where('user_id', $request->user()->id)
+                ->where('visit_task_id', $task->id)
+                ->count();
+        }
         return response()->json($tasks);
     }
 
