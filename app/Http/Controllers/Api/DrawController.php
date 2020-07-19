@@ -28,7 +28,7 @@ class DrawController extends Controller
      */
     public function show(Draw $draw)
     {
-        $draw->draw_items = $draw->items;
+        $draw->items = $draw->items;
 
         return response()->json($draw);
     }
