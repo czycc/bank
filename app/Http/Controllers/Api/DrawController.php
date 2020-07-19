@@ -112,11 +112,11 @@ class DrawController extends Controller
     public function verifyList(Request $request)
     {
         $items = DrawItemUser::where('phone', $request->phone)
+            ->where('draw_item_id', '!=', 0)
             ->orderBy('verify')
             ->limit(10)
             ->get();
         foreach ($items as $item) {
-            dd(DrawItem::find($item->draw_item_id));
             $item->reward = DrawItem::find($item->draw_item_id)->reward;
             $item->draw_title = $item->draw->title;
         }
