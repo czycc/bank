@@ -44,6 +44,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     Route::post('invite_task/store', 'InviteTaskController@store');
     Route::get('invite_task/{task}', 'InviteTaskController@show');
 
+    //jssdk
+    Route::post('jssdk','CommonController@jssdk');
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {
