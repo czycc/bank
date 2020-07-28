@@ -36,13 +36,18 @@ Route::group([
 
     //拓客任务
     $router->resource('out-tasks', OutTaskController::class);
+    $router->resource('out-task-users', OutTaskUserController::class);
 
     //来访任务
     $router->resource('visit-tasks', VisitTaskController::class);
+    $router->resource('visit-task-users', VisitTaskUserController::class);
 
     //老带新
     $router->resource('new-tasks', NewTaskController::class);
+    $router->resource('new-task-users', NewTaskUserController::class);
 
     //邀约任务
     $router->resource('invite-tasks', InviteTaskController::class);
+    $router->resource('invite-task-users', InviteTaskUserController::class);
+
 });
