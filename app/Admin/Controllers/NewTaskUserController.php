@@ -30,7 +30,7 @@ class NewTaskUserController extends AdminController
 
 
         $grid->column('id', __('Id'));
-        $grid->column('user.name', __('name'));
+        $grid->column('user.name', '业务员姓名');
         $grid->column('task.title', '任务名称');
         $grid->column('old_phone', __('Old phone'));
         $grid->column('old_username', __('Old username'));

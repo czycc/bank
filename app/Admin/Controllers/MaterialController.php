@@ -25,6 +25,7 @@ class MaterialController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Material());
+        $grid->model()->orderByDesc('id');
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));

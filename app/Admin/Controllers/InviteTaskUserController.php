@@ -27,9 +27,10 @@ class InviteTaskUserController extends AdminController
         $grid = new Grid(new InviteTaskUser());
 
         $grid->disableActions();
+        $grid->model()->orderByDesc('id');
 
         $grid->column('id', __('Id'));
-        $grid->column('user.name', __('name'));
+        $grid->column('user.name', '业务员姓名');
         $grid->column('task.title', '任务名称');
         $grid->column('phone', __('Phone'));
         $grid->column('created_at', __('Created at'));

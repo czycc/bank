@@ -29,7 +29,7 @@ class OutTaskUserController extends AdminController
         $grid->disableActions();
 
         $grid->column('id', __('Id'));
-        $grid->column('user.name', __('name'));
+        $grid->column('user.name', '业务员姓名');
         $grid->column('task.title', '任务名称');
         $grid->column('phone', __('Phone'));
         $grid->column('created_at', __('Created at'));

@@ -30,13 +30,13 @@ class VisitTaskUserController extends AdminController
 
 
         $grid->column('id', __('Id'));
-        $grid->column('user.name', __('name'));
+        $grid->column('user.name', '业务员姓名');
         $grid->column('task.title', '任务名称');
         $grid->column('phone', __('Phone'));
         $grid->column('username', __('Username'));
         $grid->column('comment', __('Comment'));
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+//        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }

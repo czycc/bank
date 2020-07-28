@@ -25,6 +25,7 @@ class OutTaskController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new OutTask());
+        $grid->model()->orderByDesc('id');
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));

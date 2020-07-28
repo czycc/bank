@@ -25,6 +25,7 @@ class DrawController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Draw());
+        $grid->model()->orderByDesc('id');
 
         $grid->actions(function ($actions) {
 //            $actions->disableDelete();

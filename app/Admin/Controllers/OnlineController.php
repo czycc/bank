@@ -27,6 +27,7 @@ class OnlineController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Online());
+        $grid->model()->orderByDesc('id');
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));

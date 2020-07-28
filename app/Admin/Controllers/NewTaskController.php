@@ -25,6 +25,7 @@ class NewTaskController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new NewTask());
+        $grid->model()->orderByDesc('id');
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
