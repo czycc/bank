@@ -12,4 +12,8 @@ class InviteTaskUser extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function task()
+    {
+        return $this->belongsTo(InviteTask::class, 'invite_task_id');
+    }
 }

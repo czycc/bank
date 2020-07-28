@@ -12,4 +12,9 @@ class VisitTaskUser extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function task()
+    {
+        return $this->belongsTo(VisitTask::class, 'Visit_task_id');
+    }
 }

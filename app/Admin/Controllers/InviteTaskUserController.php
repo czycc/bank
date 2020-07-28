@@ -30,7 +30,7 @@ class InviteTaskUserController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.name', __('name'));
-        $grid->column('invite_task_id', __('Invite task id'));
+        $grid->column('task.title', '任务名称');
         $grid->column('phone', __('Phone'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
