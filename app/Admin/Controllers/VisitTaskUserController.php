@@ -16,7 +16,7 @@ class VisitTaskUserController extends AdminController
      *
      * @var string
      */
-    protected $title = '拓客任务客户 ';
+    protected $title = '来访任务客户';
 
     /**
      * Make a grid builder.
