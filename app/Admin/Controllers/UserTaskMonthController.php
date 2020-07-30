@@ -13,14 +13,14 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class UserTaskDayController extends AdminController
+class UserTaskMonthController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = '用户前一日统计';
+    protected $title = '用户上月统计';
 
     /**
      * Make a grid builder.
@@ -33,13 +33,13 @@ class UserTaskDayController extends AdminController
 
         $grid->disableActions();
 //
-    $grid->disablePagination();
+        $grid->disablePagination();
 //
-    $grid->disableCreateButton();
+        $grid->disableCreateButton();
 //
-    $grid->disableFilter();
+        $grid->disableFilter();
 //
-    $grid->disableRowSelector();
+        $grid->disableRowSelector();
 //
 //    $grid->disableColumnSelector();
 //
@@ -59,26 +59,26 @@ class UserTaskDayController extends AdminController
         $grid->column('phone', __('Phone'));
         $grid->column('out_task', '拓客任务')->display(function () {
             return  OutTaskUser::where('user_id', $this->id)
-                ->where('created_at', '>', Carbon::yesterday())
-                ->where('created_at', '<', Carbon::today())
+                ->where('created_at', '>', Carbon::now()->subMonth()->firstOfMonth())
+                ->where('created_at', '<', Carbon::now()->subMonth()->lastOfMonth()->addDay())
                 ->count();
         })->sortable();
         $grid->column('visit_task', '来访任务')->display(function () {
             return  VisitTaskUser::where('user_id', $this->id)
-                ->where('created_at', '>', Carbon::yesterday())
-                ->where('created_at', '<', Carbon::today())
+                ->where('created_at', '>', Carbon::now()->subMonth()->firstOfMonth())
+                ->where('created_at', '<', Carbon::now()->subMonth()->lastOfMonth()->addDay())
                 ->count();
         })->sortable();
         $grid->column('new_task', '老带新任务')->display(function () {
             return  NewTaskUser::where('user_id', $this->id)
-                ->where('created_at', '>', Carbon::yesterday())
-                ->where('created_at', '<', Carbon::today())
+                ->where('created_at', '>', Carbon::now()->subMonth()->firstOfMonth())
+                ->where('created_at', '<', Carbon::now()->subMonth()->lastOfMonth()->addDay())
                 ->count();
         })->sortable();
         $grid->column('invite_task', '邀约任务')->display(function () {
             return  InviteTaskUser::where('user_id', $this->id)
-                ->where('created_at', '>', Carbon::yesterday())
-                ->where('created_at', '<', Carbon::today())
+                ->where('created_at', '>', Carbon::now()->subMonth()->firstOfMonth())
+                ->where('created_at', '<', Carbon::now()->subMonth()->lastOfMonth()->addDay())
                 ->count();
         })->sortable();
         return $grid;
