@@ -418,6 +418,12 @@ return [
                 'lang'   => 'zh-CN',
                 'height' => 500,
             ]
+        ],
+        'grid-exporter' => [
+
+            // Set this to false if you want to disable this extension
+            'enable' => true,
+
         ]
     ],
 ];
