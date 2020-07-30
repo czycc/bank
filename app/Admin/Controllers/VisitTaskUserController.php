@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\VisitTask;
 use App\Models\VisitTaskUser;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -41,7 +42,13 @@ class VisitTaskUserController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.name', '业务员姓名');
-        $grid->column('task.title', '任务名称');
+        $grid->column('task.title', '任务名称')->display(function () {
+            $visit = VisitTask::find($this->visit_task_id)->first();
+            if ($visit) {
+                return $visit->title;
+            }
+            return '';
+        });
         $grid->column('phone', __('Phone'));
         $grid->column('username', __('Username'));
         $grid->column('comment', __('Comment'));
