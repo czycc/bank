@@ -15,6 +15,6 @@ class VisitTaskUser extends Model
 
     public function task()
     {
-        return $this->belongsTo(VisitTask::class, 'Visit_task_id');
+        return $this->belongsTo(VisitTask::class, 'visit_task_id');
     }
 }
