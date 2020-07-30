@@ -51,6 +51,6 @@ Route::group([
     $router->resource('invite-task-users', InviteTaskUserController::class);
 
     $router->resource('user-task-day', UserTaskDayController::class);
-    $router->resource('user-task-week', UserWeekDayController::class);
+    $router->resource('user-task-week', UserTaskWeekController::class);
     $router->resource('user-task-month', UserTaskMonthController::class);
 });
