@@ -417,6 +417,7 @@ return [
             'config' => [
                 'lang'   => 'zh-CN',
                 'height' => 500,
+                'filebrowserImageUploadUrl' => '/img/upload', // your url
             ]
         ],
         'grid-exporter' => [

@@ -15,3 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('qrcode', 'Api\\CommonController@qrcode');
+
+Route::post('img/upload', 'ImgUploadController@upload'); //编辑器上传
