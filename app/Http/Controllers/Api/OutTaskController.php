@@ -59,15 +59,15 @@ class OutTaskController extends Controller
             abort(400, '不合法的业务员id');
         }
 
-        if (
-            !OutTask::where('id', $request->out_task_id)
-//            ->where('enable', 1)
-//            ->where('start', '<', Carbon::now())
-//            ->where('end', '>', Carbon::now())
-            ->first()
-        ) {
-            abort(400, '很抱歉，活动已经结束');
-        }
+//        if (
+//            !OutTask::where('id', $request->out_task_id)
+////            ->where('enable', 1)
+////            ->where('start', '<', Carbon::now())
+////            ->where('end', '>', Carbon::now())
+//            ->first()
+//        ) {
+//            abort(400, '很抱歉，活动已经结束');
+//        }
 
         //保存
         OutTaskUser::create([
