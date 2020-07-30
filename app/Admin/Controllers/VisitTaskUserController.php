@@ -27,7 +27,17 @@ class VisitTaskUserController extends AdminController
         $grid = new Grid(new VisitTaskUser());
 
         $grid->disableActions();
+        $grid->filter(function($filter){
 
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+
+            // 在这里添加字段过滤器
+            $filter->like('user.name', '业务员姓名');
+            $filter->like('task.title', '任务标题');
+            $filter->like('phone', '客户手机号');
+            $filter->between('created_at', '创建时间')->datetime();
+        });
 
         $grid->column('id', __('Id'));
         $grid->column('user.name', '业务员姓名');

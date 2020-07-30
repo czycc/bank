@@ -26,6 +26,18 @@ class InviteTaskUserController extends AdminController
     {
         $grid = new Grid(new InviteTaskUser());
 
+        $grid->filter(function($filter){
+
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+
+            // 在这里添加字段过滤器
+            $filter->like('user.name', '业务员姓名');
+            $filter->like('task.title', '任务标题');
+            $filter->like('phone', '客户手机号');
+            $filter->between('created_at', '创建时间')->datetime();
+        });
+
         $grid->disableActions();
         $grid->model()->orderByDesc('id');
 
@@ -34,7 +46,7 @@ class InviteTaskUserController extends AdminController
         $grid->column('task.title', '任务名称');
         $grid->column('phone', __('Phone'));
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+//        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
