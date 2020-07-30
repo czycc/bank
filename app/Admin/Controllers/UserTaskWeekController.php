@@ -64,25 +64,25 @@ class UserTaskWeekController extends AdminController
                 ->where('created_at', '>', Carbon::now()->subWeek()->startOfWeek())
                 ->where('created_at', '<', Carbon::now()->subWeek()->endOfWeek())
                 ->count();
-        })->sortable();
+        });
         $grid->column('visit_task', '来访任务')->display(function () {
             return  VisitTaskUser::where('user_id', $this->id)
                 ->where('created_at', '>', Carbon::now()->subWeek()->startOfWeek())
                 ->where('created_at', '<', Carbon::now()->subWeek()->endOfWeek())
                 ->count();
-        })->sortable();
+        });
         $grid->column('new_task', '老带新任务')->display(function () {
             return  NewTaskUser::where('user_id', $this->id)
                 ->where('created_at', '>', Carbon::now()->subWeek()->startOfWeek())
                 ->where('created_at', '<', Carbon::now()->subWeek()->endOfWeek())
                 ->count();
-        })->sortable();
+        });
         $grid->column('invite_task', '邀约任务')->display(function () {
             return  InviteTaskUser::where('user_id', $this->id)
                 ->where('created_at', '>', Carbon::now()->subWeek()->startOfWeek())
                 ->where('created_at', '<', Carbon::now()->subWeek()->endOfWeek())
                 ->count();
-        })->sortable();
+        });
 
         return $grid;
     }
