@@ -63,9 +63,8 @@ class OnlineController extends Controller
         $online_id = $request->get('online_id');
         $online = Online::find($online_id);
 
-//        visits($online, $online_id . '_' . $user_id)->increment();
-//        visits($online)->increment();
-        dd(visits($online, $online_id . '_' . $user_id)->increment());
+        visits($online, $online_id . '_' . $user_id)->increment();
+        visits($online)->increment();
         return redirect($path);
     }
 
