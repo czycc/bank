@@ -62,6 +62,7 @@ class OnlineController extends Controller
         $online = Online::find($online_id);
 
         visits($online, $online_id.'_'.$user_id)->increment();
+        visits($online)->increment();
 
         return redirect($path);
     }
