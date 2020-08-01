@@ -100,7 +100,7 @@ class CommonController extends Controller
                 ->where('enable', 1)
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
-                ->limit(3)
+                ->limit(4)
                 ->get()
         ];
         $data['products'] = [
@@ -109,7 +109,7 @@ class CommonController extends Controller
                 ->where('enable', 1)
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
-                ->limit(3)
+                ->limit(4)
                 ->get()
         ];
         $data['courses'] = [
@@ -118,7 +118,7 @@ class CommonController extends Controller
                 ->where('enable', 1)
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
-                ->limit(3)
+                ->limit(4)
                 ->get()
         ];
 
