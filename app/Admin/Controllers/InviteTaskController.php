@@ -88,7 +88,7 @@ class InviteTaskController extends AdminController
         ])->default('全体支行');
         $form->datetime('start', __('Start'))->default(date('Y-m-d H:i:s'));
         $form->datetime('end', __('End'))->default(date('Y-m-d H:i:s'));
-        $form->text('urgency', __('Urgency'))->options([
+        $form->select('urgency', __('Urgency'))->options([
             0 => '普通',
             1 => '急',
             2 => '特急'
