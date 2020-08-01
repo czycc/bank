@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\OnlineRequest;
 use App\Models\Online;
+use App\Models\OnlineUser;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -86,7 +87,6 @@ class OnlineController extends Controller
         if (
         !Online::where('id', $request->online_id)
             ->where('enable', 1)
-            ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
             ->first()
         ) {
@@ -97,9 +97,9 @@ class OnlineController extends Controller
             abort(400, '不合法的业务员id');
         }
         //保存
-        Online::create([
+        OnlineUser::create([
             'user_id' => $request->user_id,
-            'invite_task_id' => $request->invite_task_id,
+            'online_id' => $request->online_id,
             'phone' => $data['phone'],
         ]);
 

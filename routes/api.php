@@ -48,6 +48,9 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     //jssdk
     Route::post('jssdk','CommonController@jssdk');
 
+    //活动报名
+    Route::post('online/store', 'OnlineController@store');
+
 });
 
 Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->group(function () {
