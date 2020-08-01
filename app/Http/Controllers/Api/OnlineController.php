@@ -22,7 +22,7 @@ class OnlineController extends Controller
             ->paginate(20);
         if ($request->user()) {
             foreach ($data as $item) {
-                $item->visit = visits($item, $item->id . '_' . $request->user()->id);
+                $item->visit = visits($item, $item->id . '_' . $request->user()->id)->count();
             }
         }
 
