@@ -22,6 +22,10 @@ class VerificationCodesController extends Controller
             if (OutTaskUser::where('phone', $phone)->first()) {
                 abort(400, '您已经参与过拓客任务');
             }
+        } elseif ($request->category == 'new_task') {
+            if (OutTaskUser::where('phone', $phone)->first()) {
+                abort(400, '您已经参与过拓客任务');
+            }
         }
         // 生成4位随机数，左侧补0
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);

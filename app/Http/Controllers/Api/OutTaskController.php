@@ -76,7 +76,7 @@ class OutTaskController extends Controller
             'phone' => $data['phone']
         ]);
 
-//        Cache::forget($request->verify_key);
+        Cache::forget($request->verify_key);
 
         return response()->json([
             'message' => '您已经参与成功'

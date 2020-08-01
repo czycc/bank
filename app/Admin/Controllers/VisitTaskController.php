@@ -26,6 +26,19 @@ class VisitTaskController extends AdminController
     {
         $grid = new Grid(new VisitTask());
         $grid->model()->orderByDesc('id');
+        $grid->filter(function($filter){
+
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+
+            // 在这里添加字段过滤器
+            $filter->like('title', __('Title'));
+            $filter->like('task.title', '任务标题');
+            $filter->like('phone', '客户手机号');
+            $filter->between('end', __('End'))->datetime();
+            $filter->between('start', __('Start'))->datetime();
+
+        });
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));

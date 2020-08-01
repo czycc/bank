@@ -70,7 +70,7 @@ class InviteTaskController extends Controller
             'phone' => $data['phone'],
         ]);
 
-//        Cache::forget($request->verify_key);
+        Cache::forget($request->verify_key);
 
         return response()->json([
             'message' => '验证成功，信息已录入'

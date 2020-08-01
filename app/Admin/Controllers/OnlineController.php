@@ -28,7 +28,18 @@ class OnlineController extends AdminController
     {
         $grid = new Grid(new Online());
         $grid->model()->orderByDesc('id');
+        $grid->filter(function($filter){
 
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+
+            // 在这里添加字段过滤器
+            $filter->like('title', __('Title'));
+            $filter->like('scope.name', __('Scope'));
+            $filter->like('category.name', __('Board'));
+
+
+        });
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
 //        $grid->column('content', __('Content'));

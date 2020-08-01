@@ -70,7 +70,7 @@ class NewTaskController extends Controller
             'new_username' => $request->new_username
         ]);
 
-//        Cache::forget($request->verify_key);
+        Cache::forget($request->verify_key);
 
         return response()->json([
             'message' => '验证成功，信息已录入'
