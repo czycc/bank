@@ -65,6 +65,7 @@ class OnlineController extends Controller
 
 //        visits($online, $online_id . '_' . $user_id)->increment();
 //        visits($online)->increment();
+        dd($online_id . '_' . $user_id);
         dd(visits($online, $online_id . '_' . $user_id)->increment());
         return redirect($path);
     }
