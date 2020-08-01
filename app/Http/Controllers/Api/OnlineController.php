@@ -20,6 +20,11 @@ class OnlineController extends Controller
             ->whereDate('end', '>', Carbon::now())
             ->orderByDesc('weight')
             ->paginate(20);
+        if ($request->user()) {
+            foreach ($data as $item) {
+                $item->visit = visits($item, $item->id . '_' . $request->user()->id);
+            }
+        }
 
         return response()->json($data);
     }
@@ -44,5 +49,17 @@ class OnlineController extends Controller
             'online' => $online,
             'is_open' => $online->end < Carbon::now()
         ]);
+    }
+
+    public function shareToOther(Request $request)
+    {
+        $path = $request->get('path');
+        $user_id = $request->get('user_id');
+        $online_id =  $request->get('online_id');
+        $online = Online::find($online_id);
+
+        visits($online, $online_id.'_'.$user_id)->increment();
+
+        return redirect($path);
     }
 }

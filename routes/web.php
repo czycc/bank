@@ -17,3 +17,5 @@ Route::get('/', function () {
 Route::get('qrcode', 'Api\\CommonController@qrcode');
 
 Route::post('img/upload', 'ImgUploadController@upload'); //编辑器上传
+
+Route::get('onlines/share', 'Api\\OnlineController@shareToOther');
