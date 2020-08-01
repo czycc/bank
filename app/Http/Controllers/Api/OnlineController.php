@@ -38,8 +38,8 @@ class OnlineController extends Controller
 
     public function share(User $user, Online $online)
     {
-        visits($online, $online->id.'_'.$user->id)->increment();
-        visits($online)->increment();
+//        visits($online, $online->id.'_'.$user->id)->increment();
+//        visits($online)->increment();
 
         return response()->json([
             'user' => [
