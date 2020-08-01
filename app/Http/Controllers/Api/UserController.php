@@ -27,7 +27,7 @@ class UserController extends Controller
 
         $token = \Auth::guard('api')->login($user);
 
-//        Cache::forget($request->verify_key);
+        Cache::forget($request->verify_key);
         return response()->json([
             'user' => $user,
             'access_token' => $token,

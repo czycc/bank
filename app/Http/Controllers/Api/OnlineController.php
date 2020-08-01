@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\OnlineRequest;
 use App\Models\Online;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class OnlineController extends Controller
 {
@@ -58,12 +60,54 @@ class OnlineController extends Controller
     {
         $path = $request->get('path');
         $user_id = $request->get('user_id');
-        $online_id =  $request->get('online_id');
+        $online_id = $request->get('online_id');
         $online = Online::find($online_id);
 
-        visits($online, $online_id.'_'.$user_id)->increment();
-        visits($online)->increment();
-
+//        visits($online, $online_id . '_' . $user_id)->increment();
+//        visits($online)->increment();
+        dd(visits($online, $online_id . '_' . $user_id)->increment());
         return redirect($path);
+    }
+
+    public function store(OnlineRequest $request)
+    {
+        //获取验证码
+        $data = Cache::get($request->verify_key);
+
+
+        if (!$data) {
+            abort(400, '验证码已过期，请重新发送');
+        }
+
+        if (!hash_equals($data['code'], $request->verify_code)) {
+            // 返回401
+            abort(400, '验证码不符合');
+        }
+
+        if (
+        !Online::where('id', $request->online_id)
+            ->where('enable', 1)
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now())
+            ->first()
+        ) {
+            abort(400, '很抱歉，活动已经结束');
+        }
+
+        if (!User::find($request->user_id)) {
+            abort(400, '不合法的业务员id');
+        }
+        //保存
+        Online::create([
+            'user_id' => $request->user_id,
+            'invite_task_id' => $request->invite_task_id,
+            'phone' => $data['phone'],
+        ]);
+
+        Cache::forget($request->verify_key);
+
+        return response()->json([
+            'message' => '验证成功，信息已录入'
+        ]);
     }
 }
