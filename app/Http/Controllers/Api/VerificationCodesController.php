@@ -32,7 +32,7 @@ class VerificationCodesController extends Controller
 //        $code ='0000';
         try {
             $result = $easySms->send($phone, [
-                'content' => "【上汽名爵】您的验证码是{$code}，有效期三分钟",
+                'content' => "【携手共赢】您的验证码是{$code}，有效期三分钟",
             ]);
         } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $message = $exception->getException('yunpian')->getMessage();
