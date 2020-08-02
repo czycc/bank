@@ -17,4 +17,14 @@ class DrawItemUser extends Model
     {
         return $this->belongsTo(DrawItem::class, 'draw_item_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function verify_user()
+    {
+        return $this->belongsTo(User::class, 'verify_user_id');
+    }
 }

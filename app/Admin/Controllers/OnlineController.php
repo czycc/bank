@@ -45,11 +45,14 @@ class OnlineController extends AdminController
 //        $grid->column('content', __('Content'));
         $grid->column('scope.name', __('Scope'));
         $grid->column('category.name', __('Board'));
-        $grid->column('end', __('End'));
+        $grid->column('end', __('End'))->orderable();
         $grid->column('enable', __('Enable'))->using([
             0 => '否',
             1 => '是'
         ]);
+        $grid->column('visit', '总点击量')->display(function () {
+            return visits($this)->count();
+        });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 

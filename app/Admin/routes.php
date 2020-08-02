@@ -27,6 +27,8 @@ Route::group([
 
     //抽奖工具
     $router->resource('draws', DrawController::class);
+    //中奖信息
+    $router->resource('draw-item-users', DrawItemUserController::class);
 
     //抽奖规则
     $router->get('draw_rule', DrawForm::class);
@@ -53,4 +55,5 @@ Route::group([
     $router->resource('user-task-day', UserTaskDayController::class);
     $router->resource('user-task-week', UserTaskWeekController::class);
     $router->resource('user-task-month', UserTaskMonthController::class);
+
 });
