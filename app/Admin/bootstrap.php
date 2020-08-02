@@ -42,6 +42,6 @@ Grid::init(function (Grid $grid) {
     $grid->actions(function (Grid\Displayers\Actions $actions) {
         $actions->disableView();
 //        $actions->disableEdit();
-//        $actions->disableDelete();
+        $actions->disableDelete();
     });
 });
