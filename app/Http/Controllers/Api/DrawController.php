@@ -60,7 +60,7 @@ class DrawController extends Controller
             'phone' => $data['phone'],
             'user_id' => $data['user_id'],
             'draw_item_id' => $draw_item_id,
-            'draw_id' => $data['draw_id']
+            'draw_id' => $draw->id
         ]);
 
         return response()->json($i);
