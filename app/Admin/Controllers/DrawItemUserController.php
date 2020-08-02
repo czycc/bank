@@ -38,6 +38,8 @@ class DrawItemUserController extends AdminController
             $filter->like('user.name', '用户名');
             $filter->like('draw_item.reward', '奖品名称');
             $filter->like('draw.title', '抽奖活动名称');
+            $filter->like('phone', '手机号');
+            $filter->like('verify_user.name', '核销人');
 
 
         });
