@@ -102,6 +102,7 @@ class CommonController extends Controller
             'category_id' => 1,
             'data' => Online::where('category_id', 1)
                 ->where('enable', 1)
+                ->whereIn('scope_id', [1, $request->user()->scope_id])
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
                 ->limit(4)
@@ -111,6 +112,7 @@ class CommonController extends Controller
             'category_id' => 2,
             'data' => Online::where('category_id', 2)
                 ->where('enable', 1)
+                ->whereIn('scope_id', [1, $request->user()->scope_id])
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
                 ->limit(4)
@@ -120,6 +122,7 @@ class CommonController extends Controller
             'category_id' => 3,
             'data' => Online::where('category_id', 3)
                 ->where('enable', 1)
+                ->whereIn('scope_id', [1, $request->user()->scope_id])
                 ->whereDate('end', '>', Carbon::now())
                 ->orderByDesc('weight')
                 ->limit(4)

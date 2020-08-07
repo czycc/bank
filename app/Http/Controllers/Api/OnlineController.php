@@ -20,6 +20,7 @@ class OnlineController extends Controller
         $data = Online::select(['id', 'title', 'banner', 'end'])
             ->where('category_id', $category_id)
             ->where('enable', 1)
+            ->whereIn('scope_id', [1, $request->user()->scope_id])
             ->whereDate('end', '>', Carbon::now())
             ->orderByDesc('weight')
             ->paginate(20);
