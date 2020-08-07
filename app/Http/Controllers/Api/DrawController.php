@@ -49,9 +49,18 @@ class DrawController extends Controller
         $draw = Draw::find($data['draw_id']);
 
         $a[] = 0;
+        $num = DrawItemUser::where('phone', $data['phone'])
+            ->where('draw_id', $draw->id)
+            ->count();
+
+        if ($num >= $draw->num) {
+            abort(400, '很抱歉,您的抽奖次数已用完');
+        }
 
         foreach ($draw->items as $item) {
-            $a[] = $item->id;
+            if ($item->stock > 0 ) {
+                $a[] = $item->id;
+            }
         }
 
         $draw_item_id = array_rand($a);
@@ -62,6 +71,14 @@ class DrawController extends Controller
             'draw_item_id' => $draw_item_id,
             'draw_id' => $draw->id
         ]);
+        unset($a);
+        //减少库存
+        if ($draw_item_id) {
+            $item = DrawItem::find($draw_item_id);
+            $item->stock -= 1;
+            $item->out += 1;
+            $item->save();
+        }
 
         return response()->json($i);
     }
