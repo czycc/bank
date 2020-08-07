@@ -20,6 +20,7 @@ class OutTaskController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
+            ->whereIn('scope_id', [1, $request->user()->scope_id])
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->paginate(10);

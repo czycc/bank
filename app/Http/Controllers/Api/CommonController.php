@@ -68,6 +68,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
+            ->where('scope_id', 1)
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
@@ -75,6 +76,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
+            ->where('scope_id', 1)
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
@@ -82,6 +84,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
+            ->where('scope_id', 1)
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
@@ -89,6 +92,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
+            ->where('scope_id', 1)
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
