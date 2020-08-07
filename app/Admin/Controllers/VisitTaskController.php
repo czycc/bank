@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Scope;
 use App\Models\VisitTask;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -96,9 +97,14 @@ class VisitTaskController extends AdminController
 
         $form->text('title', __('Title'))->rules('required');
         $form->ckeditor('content', __('Content'))->rules('required');
-        $form->select('scope', __('Scope'))->options([
-            '全体支行' => '全体支行'
-        ])->default('全体支行');
+        $form->select('scope_id', __('Scope'))->options(function () {
+            $scope = Scope::all();
+            $a = [];
+            foreach ($scope as $item) {
+                $a[$item->id] = $item->name;
+            }
+            return $a;
+        })->default(1);
         $form->datetime('start', __('Start'))->default(date('Y-m-d H:i:s'));
         $form->datetime('end', __('End'))->default(date('Y-m-d H:i:s'));
         $form->select('urgency', __('Urgency'))->options([

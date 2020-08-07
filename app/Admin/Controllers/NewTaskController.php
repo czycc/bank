@@ -84,7 +84,7 @@ class NewTaskController extends AdminController
 
         $form->text('title', __('Title'))->rules('required');
         $form->ckeditor('content', __('Content'))->rules('required');
-        $form->select('scope', __('Scope'))->options(function () {
+        $form->select('scope_id', __('Scope'))->options(function () {
             $scope = Scope::all();
             $a = [];
             foreach ($scope as $item) {
