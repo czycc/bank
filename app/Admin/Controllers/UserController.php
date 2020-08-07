@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Scope;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -92,6 +93,14 @@ class UserController extends AdminController
         $form->image('avatar', __('Avatar'));
         $form->image('wx_avatar', __('Wx avatar'));
         $form->hidden('password', __('Password'))->default('12345678');
+        $form->select('scope_id', __('Scope'))->options(function () {
+            $scope = Scope::all();
+            $a = [];
+            foreach ($scope as $item) {
+                $a[$item->id] = $item->name;
+            }
+            return $a;
+        })->default(1);
 //        $form->text('remember_token', __('Remember token'));
 
         return $form;
