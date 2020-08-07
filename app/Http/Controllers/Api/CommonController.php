@@ -60,7 +60,7 @@ class CommonController extends Controller
      *
      * 首页数据
      */
-    public function home()
+    public function home(Request $request)
     {
         $data = [];
 
@@ -68,7 +68,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
-            ->where('scope_id', 1)
+            ->whereIn('scope_id', [1, $request->user()->scope_id])
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
@@ -76,7 +76,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
-            ->where('scope_id', 1)
+            ->whereIn('scope_id', [1, $request->user()->scope_id])
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
@@ -84,7 +84,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
-            ->where('scope_id', 1)
+            ->whereIn('scope_id', [1, $request->user()->scope_id])
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
@@ -92,7 +92,7 @@ class CommonController extends Controller
             ->where('enable', 1)
             ->where('start', '<', Carbon::now())
             ->where('end', '>', Carbon::now())
-            ->where('scope_id', 1)
+            ->whereIn('scope_id', [1, $request->user()->scope_id])
             ->orderByDesc('urgency')
             ->orderByDesc('created_at')
             ->first();
