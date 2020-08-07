@@ -102,7 +102,7 @@ class UserController extends AdminController
                 }
             }
             return $a;
-        })->default(1);
+        })->default(2);
 //        $form->text('remember_token', __('Remember token'));
 
         return $form;
