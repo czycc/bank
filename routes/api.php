@@ -32,8 +32,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     Route::get('draw/{draw}', 'DrawController@show');
     Route::post('draw_item', 'DrawController@drawItem');
     Route::post('draw/join', 'DrawController@store');
-    //首页数据
-    Route::get('home', 'CommonController@home');
+
 
     //分享活动信息
     Route::get('share/user/{user}/online/{online}', 'OnlineController@share');
@@ -72,6 +71,9 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
     //外拓任务
     Route::get('out_task', 'OutTaskController@index');
     Route::get('out_task/{task}', 'OutTaskController@show');
+
+    //首页数据
+    Route::get('home', 'CommonController@home');
 
     //来访任务
     Route::get('visit_task', 'VisitTaskController@index');
