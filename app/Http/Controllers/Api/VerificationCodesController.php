@@ -13,19 +13,22 @@ class VerificationCodesController extends Controller
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
         $phone = $request->phone;
-        if ($request->category == 'login') {
+        $category = $request->category;
+        if ($category == 'login') {
             if (!User::where('phone', $phone)->first()) {
                 abort(400, '用户手机号不存在');
             }
-        } elseif ($request->category == 'out_task') {
+        } elseif ($category == 'out_task') {
             //外拓任务
             if (OutTaskUser::where('phone', $phone)->first()) {
                 abort(400, '您已经参与过拓客任务');
             }
-        } elseif ($request->category == 'new_task') {
+        } elseif ($category == 'new_task') {
             if (OutTaskUser::where('phone', $phone)->first()) {
-                abort(400, '您已经参与过拓客任务');
+                abort(400, '已经参与过老带新任务');
             }
+        } elseif ($category == 'invite_task') {
+
         }
         // 生成4位随机数，左侧补0
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
