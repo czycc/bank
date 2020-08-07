@@ -97,7 +97,9 @@ class UserController extends AdminController
             $scope = Scope::all();
             $a = [];
             foreach ($scope as $item) {
-                $a[$item->id] = $item->name;
+                if ($item->id !== 1) {
+                    $a[$item->id] = $item->name;
+                }
             }
             return $a;
         })->default(1);
