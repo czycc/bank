@@ -71,7 +71,9 @@ class DrawController extends Controller
             'draw_item_id' => $draw_item_id,
             'draw_id' => $draw->id
         ]);
+
         unset($a);
+
         //减少库存
         if ($draw_item_id) {
             $item = DrawItem::find($draw_item_id);
