@@ -35,7 +35,7 @@ class DrawItemUserController extends AdminController
 
             // 在这里添加字段过滤器
             $filter->like('title', __('Title'));
-            $filter->like('user.name', '用户名');
+            $filter->like('user.name', '业务员姓名');
             $filter->like('draw_item.reward', '奖品名称');
             $filter->like('draw.title', '抽奖活动名称');
             $filter->like('phone', '手机号');

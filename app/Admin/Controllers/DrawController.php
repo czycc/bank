@@ -32,6 +32,21 @@ class DrawController extends AdminController
 //                $actions->disableEdit();
         });
 
+        $grid->filter(function ($filter) {
+
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+
+            // 在这里添加字段过滤器
+            $filter->like('title', __('Title'));
+            $filter->between('end', __('End'))->datetime();
+            $filter->equal('enable', __('Enable'))->radio([
+                0 => '否',
+                1 => '是'
+            ]);
+
+        });
+
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
         $grid->column('background', __('Background'))->image('', 100, 100);
@@ -39,7 +54,10 @@ class DrawController extends AdminController
         $grid->column('rule', __('Rule'));
         $grid->column('num', __('Num'));
         $grid->column('end', __('End'));
-        $grid->column('enable', __('Enable'));
+        $grid->column('enable', __('Enable'))->using([
+            0 => '否',
+            1 => '是'
+        ]);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
