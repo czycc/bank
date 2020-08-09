@@ -48,21 +48,21 @@ class ScopeDayController extends AdminController
         });
         $grid->column('visit_task', '来访任务')->display(function () {
             $ids = User::select(['id'])->where('scope_id', $this->id)->get();
-            return  VisitTaskUser::where('user_id', $ids)
+            return  VisitTaskUser::whereIn('user_id', $ids)
                 ->where('created_at', '>', Carbon::yesterday())
                 ->where('created_at', '<', Carbon::today())
                 ->count();
         });
         $grid->column('new_task', '老带新任务')->display(function () {
             $ids = User::select(['id'])->where('scope_id', $this->id)->get();
-            return  NewTaskUser::where('user_id', $ids)
+            return  NewTaskUser::whereIn('user_id', $ids)
                 ->where('created_at', '>', Carbon::yesterday())
                 ->where('created_at', '<', Carbon::today())
                 ->count();
         });
         $grid->column('invite_task', '邀约任务')->display(function () {
             $ids = User::select(['id'])->where('scope_id', $this->id)->get();
-            return  InviteTaskUser::where('user_id', $ids)
+            return  InviteTaskUser::whereIn('user_id', $ids)
                 ->where('created_at', '>', Carbon::yesterday())
                 ->where('created_at', '<', Carbon::today())
                 ->count();
