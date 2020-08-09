@@ -15,7 +15,7 @@ class OnlineUserController extends AdminController
      *
      * @var string
      */
-    protected $title = '热梦活动报名人员';
+    protected $title = '热门活动报名人员';
 
     /**
      * Make a grid builder.
@@ -33,12 +33,14 @@ class OnlineUserController extends AdminController
 
             // 在这里添加字段过滤器
             $filter->like('user.name', '业务员姓名');
+            $filter->like('phone', '报名人员手机号');
+            $filter->like('online.title', '活动名称');
 
 
         });
         $grid->column('id', __('Id'));
         $grid->column('user.name', '业务员姓名');
-        $grid->column('online.title', __('Online id'));
+        $grid->column('online.title', '活动名称');
         $grid->column('phone', __('Phone'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));

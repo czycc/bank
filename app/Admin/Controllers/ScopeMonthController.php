@@ -21,7 +21,7 @@ class ScopeMonthController extends AdminController
      *
      * @var string
      */
-    protected $title = '任务范围';
+    protected $title = '月统计';
 
     /**
      * Make a grid builder.

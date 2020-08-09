@@ -20,7 +20,7 @@ class UserTaskMonthController extends AdminController
      *
      * @var string
      */
-    protected $title = '用户上月统计';
+    protected $title = '月统计';
 
     /**
      * Make a grid builder.

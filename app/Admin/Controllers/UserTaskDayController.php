@@ -20,7 +20,7 @@ class UserTaskDayController extends AdminController
      *
      * @var string
      */
-    protected $title = '用户前一日统计';
+    protected $title = '日统计';
 
     /**
      * Make a grid builder.

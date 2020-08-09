@@ -21,7 +21,7 @@ class ScopeDayController extends AdminController
      *
      * @var string
      */
-    protected $title = '任务范围';
+    protected $title = '日统计';
 
     /**
      * Make a grid builder.

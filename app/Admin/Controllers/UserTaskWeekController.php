@@ -20,7 +20,7 @@ class UserTaskWeekController extends AdminController
      *
      * @var string
      */
-    protected $title = '用户上周统计';
+    protected $title = '周统计';
 
     /**
      * Make a grid builder.
