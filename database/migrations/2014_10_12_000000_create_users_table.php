@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('wx_avatar')->nullable()->comment('头像');
-
+            $table->unsignedBigInteger('scope_id')->default(2);
 //            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

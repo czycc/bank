@@ -24,6 +24,7 @@ Route::group([
 
     //内容板块
     $router->resource('onlines', OnlineController::class);
+    $router->resource('online-users', OnlineUserController::class);
 
     //抽奖工具
     $router->resource('draws', DrawController::class);
@@ -52,8 +53,11 @@ Route::group([
     $router->resource('invite-tasks', InviteTaskController::class);
     $router->resource('invite-task-users', InviteTaskUserController::class);
 
+    //排行
     $router->resource('user-task-day', UserTaskDayController::class);
     $router->resource('user-task-week', UserTaskWeekController::class);
     $router->resource('user-task-month', UserTaskMonthController::class);
-
+    $router->resource('scope-day', ScopeDayController::class);
+    $router->resource('scope-week', ScopeWeekController::class);
+    $router->resource('scope-month', ScopeMonthController::class);
 });
