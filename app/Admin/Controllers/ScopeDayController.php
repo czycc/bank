@@ -31,6 +31,7 @@ class ScopeDayController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Scope());
+        $grid->model()->where('id', '!=', 1);
         $grid->disableActions();
         $grid->disablePagination();
         $grid->disableCreateButton();
