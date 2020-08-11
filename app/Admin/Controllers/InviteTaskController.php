@@ -16,7 +16,7 @@ class InviteTaskController extends AdminController
      *
      * @var string
      */
-    protected $title = 'InviteTask';
+    protected $title = '邀约任务';
 
     /**
      * Make a grid builder.

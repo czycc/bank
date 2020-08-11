@@ -12,6 +12,11 @@ class Scope extends Model
 
     public function outTasks()
     {
-        return $this->hasManyThrough(OutTaskUser::class, User::class, 'scope_id', 'user_id');
+        return $this->hasManyThrough(OutTaskUser::class, User::class, 'scope_id', 'user_id')->count();
+    }
+
+    public function outTaskCount()
+    {
+
     }
 }

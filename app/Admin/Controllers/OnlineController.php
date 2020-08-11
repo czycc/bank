@@ -17,7 +17,7 @@ class OnlineController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Online';
+    protected $title = '线上内容';
 
     /**
      * Make a grid builder.

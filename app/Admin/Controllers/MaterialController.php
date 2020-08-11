@@ -15,7 +15,7 @@ class MaterialController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Material';
+    protected $title = '素材管理';
 
     /**
      * Make a grid builder.

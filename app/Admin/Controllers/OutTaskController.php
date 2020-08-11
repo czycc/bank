@@ -16,7 +16,7 @@ class OutTaskController extends AdminController
      *
      * @var string
      */
-    protected $title = 'OutTask';
+    protected $title = '拓客任务';
 
     /**
      * Make a grid builder.

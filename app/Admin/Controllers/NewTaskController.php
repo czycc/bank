@@ -16,7 +16,7 @@ class NewTaskController extends AdminController
      *
      * @var string
      */
-    protected $title = 'NewTask';
+    protected $title = '老带新任务';
 
     /**
      * Make a grid builder.

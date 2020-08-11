@@ -92,3 +92,8 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
     Route::get('verify/list', 'DrawController@verifyList');
     Route::post('verify/store', 'DrawController@verifyStore');
 });
+
+/**
+ * becks啤酒
+ */
+Route::post('becks/rank', 'Becks\BecksController@rank');

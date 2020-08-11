@@ -75,6 +75,7 @@ return [
             //     'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
             // ],
         ],
+
     ],
 
     /*
