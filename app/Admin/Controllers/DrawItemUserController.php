@@ -15,7 +15,7 @@ class DrawItemUserController extends AdminController
      *
      * @var string
      */
-    protected $title = 'DrawItemUser';
+    protected $title = '中奖人信息';
 
     /**
      * Make a grid builder.
@@ -39,8 +39,12 @@ class DrawItemUserController extends AdminController
             $filter->like('draw_item.reward', '奖品名称');
             $filter->like('draw.title', '抽奖活动名称');
             $filter->like('phone', '手机号');
+            $filter->equal('verify', '是否核销')->using([
+                0 => '否',
+                1 => '是'
+            ]);
             $filter->like('verify_user.name', '核销人');
-
+            $filter->between('created_at', __('Created at'));
 
         });
         $grid->column('id', __('Id'));

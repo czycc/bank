@@ -38,6 +38,7 @@ class VisitTaskController extends AdminController
             $filter->like('phone', '客户手机号');
             $filter->between('end', __('End'))->datetime();
             $filter->between('start', __('Start'))->datetime();
+            $filter->between('created_at', __('Created at'));
 
         });
 

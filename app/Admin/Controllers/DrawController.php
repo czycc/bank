@@ -44,6 +44,7 @@ class DrawController extends AdminController
                 0 => '否',
                 1 => '是'
             ]);
+            $filter->between('created_at', __('Created at'));
 
         });
 
