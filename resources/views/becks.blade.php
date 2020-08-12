@@ -71,6 +71,7 @@
 		</div>
 		<script type="text/javascript">
             var socket = io('https://api.shanghaichujie.com/socket.io/');
+            socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
             new Vue({
 				el: '#app',
 				data: {
@@ -123,7 +124,6 @@
 					},
 					toShake(){
 						this.panel = 1
-                        socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
                         var myShakeEvent = new Shake({
 							threshold: 15, // optional shake strength threshold
 							timeout: 1000 // optional, determines the frequency of event generation
