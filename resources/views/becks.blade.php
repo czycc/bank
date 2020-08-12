@@ -48,18 +48,18 @@
 					<div class="rank1 mt112">
 						<img class="img-border" src="image/rank_border.png" alt="">
 						<img class="rank-icon" src="image/rank1.png" alt="">
-						<img class="img-avatar" src="image/rank_border.png" alt="">
+						<img class="img-avatar" src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL1msAj97srmCrYkhj4xp7hguTSVJxse2fLKVcSr7AAu20GVkWblHX2z5R0THNibafNmk2cLcs7ZDg/132" alt="">
 					</div>
 					<div class="flex mt60">
 						<div class="rank2">
 							<img class="img-border" src="image/rank_border.png" alt="">
 							<img class="rank-icon" src="image/rank2.png" alt="">
-							<img class="img-avatar" src="image/rank_border.png" alt="">
+							<img class="img-avatar" src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL1msAj97srmCrYkhj4xp7hguTSVJxse2fLKVcSr7AAu20GVkWblHX2z5R0THNibafNmk2cLcs7ZDg/132" alt="">
 						</div>
 						<div class="rank2 ml80">
 							<img class="img-border" src="image/rank_border.png" alt="">
 							<img class="rank-icon" src="image/rank3.png" alt="">
-							<img class="img-avatar" src="image/rank_border.png" alt="">
+							<img class="img-avatar" src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL1msAj97srmCrYkhj4xp7hguTSVJxse2fLKVcSr7AAu20GVkWblHX2z5R0THNibafNmk2cLcs7ZDg/132" alt="">
 						</div>
 					</div>
 					<img class="logo" src="./image/logo_rank.png" alt="">
@@ -136,8 +136,10 @@
                     this.socket = io("wss://api.shanghaichujie.com",{path: "/socket/socket.io"});
 					this.socket.on('becks_rank', (data) => {
 						//监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
-                        alert(data[0])
-						this.isEnd = true
+						for (let i=0;i<3;i++) {
+						    document.getElementsByClassName('rank'. i+1)
+                        }
+                        this.isEnd = true
 						this.panel = 2
 					});
 				}
