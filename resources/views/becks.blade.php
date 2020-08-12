@@ -113,7 +113,8 @@
 					},
 					sendUser() {
 						//发送用户进入事件
-					},
+                        this.socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
+                    },
 					sendShake() {
 						//发送摇一摇,统计一秒内摇多少次
 						console.log("shake count :",this.count)
@@ -121,7 +122,8 @@
 					},
 					toShake(){
 						this.panel = 1
-						var myShakeEvent = new Shake({
+                        this.socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
+                        var myShakeEvent = new Shake({
 							threshold: 15, // optional shake strength threshold
 							timeout: 1000 // optional, determines the frequency of event generation
 						});
@@ -133,7 +135,6 @@
 				mounted() {
 					// 监听
 					this.socket = io('https://api.shanghaichujie.com/socket.io/');
-                    this.socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
                     this.socket.on('becks_rank', (data) => {
 						//监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
 						this.isEnd = true
