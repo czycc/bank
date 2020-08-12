@@ -136,6 +136,7 @@
                     this.socket = io("wss://api.shanghaichujie.com",{path: "/socket/socket.io"});
 					this.socket.on('becks_rank', (data) => {
 						//监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
+                        alert(data[0])
 						this.isEnd = true
 						this.panel = 2
 					});
