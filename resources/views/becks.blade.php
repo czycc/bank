@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="js/font_rem.js"></script>
 		<script type="text/javascript" src="js/vant.min.js"></script>
 		<script type="text/javascript" src="js/shake.js"></script>
-		<script src="https://api.shanghaichujie.com/socket.io/socket.io.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	</head>
 	<body>
 		<div id="app" v-cloak class="container">
@@ -70,12 +70,10 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-            var socket = io('https://api.shanghaichujie.com/socket.io/');
-            socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
-            new Vue({
+			new Vue({
 				el: '#app',
 				data: {
-					// socket: null,
+					socket: null,
 					panel: 0,
 					shaked: false,
 					timer: null,
@@ -115,15 +113,15 @@
 					},
 					sendUser() {
 						//发送用户进入事件
-                        socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
-                    },
+					},
 					sendShake() {
 						//发送摇一摇,统计一秒内摇多少次
 						console.log("shake count :",this.count)
-						socket.emit('becks_shake', `{"openid":"openid", "shake":${this.count}}`);
+						this.socket.emit('becks_shake', `{"openid":"openid", "shake":${this.count}}`);
 					},
 					toShake(){
 						this.panel = 1
+                        this.socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
                         var myShakeEvent = new Shake({
 							threshold: 15, // optional shake strength threshold
 							timeout: 1000 // optional, determines the frequency of event generation
@@ -135,7 +133,8 @@
 				created() {},
 				mounted() {
 					// 监听
-                    socket.on('becks_rank', (data) => {
+                    this.socket = io("wss://api.shanghaichujie.com",{path: "/socket/socket.io"});
+					this.socket.on('becks_rank', (data) => {
 						//监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
 						this.isEnd = true
 						this.panel = 2
