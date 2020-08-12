@@ -117,11 +117,11 @@
 					sendShake() {
 						//发送摇一摇,统计一秒内摇多少次
 						console.log("shake count :",this.count)
-						this.socket.emit('becks_shake', `{"openid":"openid", "shake":${this.count}}`);
+						this.socket.emit('becks_shake', `{"openid":"{{ $user->id }}", "shake":${this.count}}`);
 					},
 					toShake(){
 						this.panel = 1
-                        this.socket.emit('becks_user_in', `{"openid":"openid","avatar":"头像地址","nickname":"昵称"}`);
+                        this.socket.emit('becks_user_in', `{"openid":"{{ $user->id }}","avatar":"http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL1msAj97srmCrYkhj4xp7hguTSVJxse2fLKVcSr7AAu20GVkWblHX2z5R0THNibafNmk2cLcs7ZDg/132","nickname":"测试昵称"}`);
                         var myShakeEvent = new Shake({
 							threshold: 15, // optional shake strength threshold
 							timeout: 1000 // optional, determines the frequency of event generation
