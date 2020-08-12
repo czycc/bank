@@ -27,3 +27,4 @@ Route::group(['middleware' => ['web', 'wechat.oauth:snsapi_userinfo']], function
         dd($user);
     });
 });
+Route::view('becks/test', 'becks');
