@@ -227,7 +227,7 @@ class CommonController extends Controller
         }
 
         foreach ($items as $item) {
-            $item->name = $item->user()->name;
+            $item->name = User::find($item->user_id)->name;
         }
 
         return response()->json([
