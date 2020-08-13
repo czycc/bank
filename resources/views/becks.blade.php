@@ -150,11 +150,11 @@
 
             this.socket.on('becks_rank', (data) => {
                 //监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
-                for (let i = 0; i < 3; i++) {
-                    document.getElementById('top'.i + 1).src = data[i].avatar
-                }
                 this.isEnd = true
                 this.panel = 2
+                for (let i = 0; i < 3; i++) {
+                    document.getElementById('top'+(i+1)).src = data[i].avatar
+                }
             });
         }
     });
