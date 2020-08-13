@@ -136,7 +136,17 @@
         mounted() {
             // 监听
             this.socket = io("wss://api.shanghaichujie.com", {path: "/socket/socket.io"});
-            window.DeviceOrientationEvent.requestPermission()
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                DeviceMotionEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('devicemotion', () => {});
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // handle regular non iOS 13+ devices
+            }
             this.socket.on('becks_rank', (data) => {
                 //监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
                 for (let i = 0; i < 3; i++) {
