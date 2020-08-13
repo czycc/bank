@@ -71,6 +71,15 @@
     </div>
 </div>
 <script type="text/javascript">
+    window.DeviceOrientationEvent.requestPermission().then(state => {
+        if (state === "granted") {//允许
+            alert("用户允许", state)
+        } else if (state === "denied") {//拒绝
+            alert("用户拒绝", state)
+        } else if (state === "prompt") {
+            alert("用户干了啥", state)
+        }
+    })
     new Vue({
         el: '#app',
         data: {
