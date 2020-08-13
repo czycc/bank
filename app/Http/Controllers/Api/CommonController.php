@@ -176,16 +176,16 @@ class CommonController extends Controller
         $task_id = $request->task_id;
         if ($category == 'out_task') {
             //查询用户
-            $model = OutTask;
+            $model = new OutTask();
         } elseif ($category == 'new_task') {
-            $model = NewTask;
+            $model = new NewTask();
         } elseif ($category == 'visit_task') {
-            $model = VisitTask;
+            $model = new VisitTask();
         } else {
-            $model = InviteTask;
+            $model = new InviteTask();
         }
 
-        $items = $model::select(DB::raw('count(*) as scount,user_id,task_id'))
+        $items = $model->select(DB::raw('count(*) as scount,user_id,task_id'))
             ->where('task_id', $task_id)
             ->groupBy('user_id')
             ->orderByDesc('scount')
