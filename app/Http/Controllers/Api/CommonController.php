@@ -181,7 +181,7 @@ class CommonController extends Controller
         $task_id = $request->task_id;
         if ($category == 'out_task') {
             //查询用户
-            $items = OutTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = OutTaskUser::select(DB::raw('count(*) as scount,user_id,out_task_id'))
                 ->where('out_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
@@ -192,7 +192,7 @@ class CommonController extends Controller
                 ->orderByDesc('id')
                 ->paginate(20);
         } elseif ($category == 'new_task') {
-            $items = NewTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = NewTaskUser::select(DB::raw('count(*) as scount,user_id,new_task_id'))
                 ->where('new_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
@@ -203,7 +203,7 @@ class CommonController extends Controller
                 ->orderByDesc('id')
                 ->paginate(20);
         } elseif ($category == 'visit_task') {
-            $items = VisitTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = VisitTaskUser::select(DB::raw('count(*) as scount,user_id,visit_task_id'))
                 ->where('visit_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
@@ -214,7 +214,7 @@ class CommonController extends Controller
                 ->orderByDesc('id')
                 ->paginate(20);
         } else {
-            $items = InviteTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = InviteTaskUser::select(DB::raw('count(*) as scount,user_id,invite_task_id'))
                 ->where('invite_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
