@@ -125,7 +125,7 @@
                 this.socket.emit('becks_user_in', `{"openid":"{{ $user->id }}","avatar":"{{ $user->avatar }}","nickname":"{{ $user->name }}"}`);
                 var myShakeEvent = new Shake({
                     threshold: 15, // optional shake strength threshold
-                    timeout: 1000 // optional, determines the frequency of event generation
+                    timeout: 10 // optional, determines the frequency of event generation
                 });
                 myShakeEvent.start();
                 if (typeof DeviceMotionEvent.requestPermission === 'function') {
