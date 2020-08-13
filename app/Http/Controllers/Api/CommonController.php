@@ -176,29 +176,54 @@ class CommonController extends Controller
         $task_id = $request->task_id;
         if ($category == 'out_task') {
             //查询用户
-            $model = new OutTask();
+            $items = OutTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+                ->where('task_id', $task_id)
+                ->groupBy('user_id')
+                ->orderByDesc('scount')
+                ->limit(5)
+                ->get();
+            $tasks = OutTask::where('user_id', $request->user()->id)
+                ->where('task_id', $request->task_id)
+                ->orderByDesc('id')
+                ->paginate(20);
         } elseif ($category == 'new_task') {
-            $model = new NewTask();
+            $items = NewTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+                ->where('task_id', $task_id)
+                ->groupBy('user_id')
+                ->orderByDesc('scount')
+                ->limit(5)
+                ->get();
+            $tasks = NewTask::where('user_id', $request->user()->id)
+                ->where('task_id', $request->task_id)
+                ->orderByDesc('id')
+                ->paginate(20);
         } elseif ($category == 'visit_task') {
-            $model = new VisitTask();
+            $items = VisitTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+                ->where('task_id', $task_id)
+                ->groupBy('user_id')
+                ->orderByDesc('scount')
+                ->limit(5)
+                ->get();
+            $tasks = VisitTask::where('user_id', $request->user()->id)
+                ->where('task_id', $request->task_id)
+                ->orderByDesc('id')
+                ->paginate(20);
         } else {
-            $model = new InviteTask();
+            $items = InviteTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+                ->where('task_id', $task_id)
+                ->groupBy('user_id')
+                ->orderByDesc('scount')
+                ->limit(5)
+                ->get();
+            $tasks = InviteTask::where('user_id', $request->user()->id)
+                ->where('task_id', $request->task_id)
+                ->orderByDesc('id')
+                ->paginate(20);
         }
 
-        $items = $model->select(DB::raw('count(*) as scount,user_id,task_id'))
-            ->where('task_id', $task_id)
-            ->groupBy('user_id')
-            ->orderByDesc('scount')
-            ->limit(5)
-            ->get();
         foreach ($items as $item) {
             $item->name = $item->user()->name;
         }
-
-        $tasks = $model::where('user_id', $request->user()->id)
-            ->where('task_id', $request->task_id)
-            ->orderByDesc('id')
-            ->paginate(20);
 
         return response()->json([
             'rank' => $items,
