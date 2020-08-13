@@ -26,4 +26,10 @@ Route::group(['middleware' => ['wechat.oauth']], function () {
         return view('becks', compact('user'));
     });
 });
-Route::view('becks/test', 'becks');
+Route::group(['middleware' => ['wechat.oauth:snsapi_userinfo']], function () {
+    Route::get('becks/test', function () {
+        $user = session('wechat.oauth_user.default'); // 拿到授权用户资料
+        dd($user);
+    });
+});
+
