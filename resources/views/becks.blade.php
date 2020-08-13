@@ -128,6 +128,17 @@
                     timeout: 1000 // optional, determines the frequency of event generation
                 });
                 myShakeEvent.start();
+                if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                    DeviceMotionEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                window.addEventListener('devicemotion', () => {});
+                            }
+                        })
+                        .catch(console.error);
+                } else {
+                    // handle regular non iOS 13+ devices
+                }
                 window.addEventListener('shake', this.shakeEventDidOccur, false);
             }
         },
@@ -136,17 +147,7 @@
         mounted() {
             // 监听
             this.socket = io("wss://api.shanghaichujie.com", {path: "/socket/socket.io"});
-            if (typeof DeviceMotionEvent.requestPermission === 'function') {
-                DeviceMotionEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            window.addEventListener('devicemotion', () => {});
-                        }
-                    })
-                    .catch(console.error);
-            } else {
-                // handle regular non iOS 13+ devices
-            }
+
             this.socket.on('becks_rank', (data) => {
                 //监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
                 for (let i = 0; i < 3; i++) {
