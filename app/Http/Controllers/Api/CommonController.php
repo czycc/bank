@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UploadImageRequest;
 use App\Models\InviteTask;
+use App\Models\InviteTaskUser;
 use App\Models\Material;
 use App\Models\NewTask;
+use App\Models\NewTaskUser;
 use App\Models\Online;
 use App\Models\OnlineCategory;
 use App\Models\OutTask;
+use App\Models\OutTaskUser;
 use App\Models\User;
 use App\Models\VisitTask;
+use App\Models\VisitTaskUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -177,46 +181,46 @@ class CommonController extends Controller
         $task_id = $request->task_id;
         if ($category == 'out_task') {
             //查询用户
-            $items = OutTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = OutTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
                 ->where('task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
-            $tasks = OutTask::where('user_id', $request->user()->id)
+            $tasks = OutTaskUser::where('user_id', $request->user()->id)
                 ->where('task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         } elseif ($category == 'new_task') {
-            $items = NewTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = NewTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
                 ->where('task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
-            $tasks = NewTask::where('user_id', $request->user()->id)
+            $tasks = NewTaskUser::where('user_id', $request->user()->id)
                 ->where('task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         } elseif ($category == 'visit_task') {
-            $items = VisitTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = VisitTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
                 ->where('task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
-            $tasks = VisitTask::where('user_id', $request->user()->id)
+            $tasks = VisitTaskUser::where('user_id', $request->user()->id)
                 ->where('task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         } else {
-            $items = InviteTask::select(DB::raw('count(*) as scount,user_id,task_id'))
+            $items = InviteTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
                 ->where('task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
-            $tasks = InviteTask::where('user_id', $request->user()->id)
+            $tasks = InviteTaskUser::where('user_id', $request->user()->id)
                 ->where('task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
