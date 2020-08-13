@@ -91,6 +91,9 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
     //核销
     Route::get('verify/list', 'DrawController@verifyList');
     Route::post('verify/store', 'DrawController@verifyStore');
+
+    //任务完成详情
+    Route::post('task/show', 'CommonController@taskList');
 });
 
 /**

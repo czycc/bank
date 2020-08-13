@@ -10,6 +10,7 @@ use App\Models\NewTask;
 use App\Models\Online;
 use App\Models\OnlineCategory;
 use App\Models\OutTask;
+use App\Models\User;
 use App\Models\VisitTask;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -137,6 +138,13 @@ class CommonController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws \Illuminate\Validation\ValidationException
+     *
+     * 生成分享二维码
+     */
     public function qrcode(Request $request)
     {
         $this->validate($request, [
@@ -149,5 +157,52 @@ class CommonController extends Controller
             ->generate($request->text);
         return Image::make($qrcode)->response();
 
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     *
+     * 任务用户详情
+     */
+    public function taskList(Request $request)
+    {
+        $this->validate($request, [
+            'category' => 'required|in:out_task,new_task,visit_task,invite_task',
+            'task_id' => 'required',
+        ]);
+        $category = $request->category;
+        $task_id = $request->task_id;
+        if ($category == 'out_task') {
+            //查询用户
+            $model = OutTask;
+        } elseif ($category == 'new_task') {
+            $model = NewTask;
+        } elseif ($category == 'visit_task') {
+            $model = VisitTask;
+        } else {
+            $model = InviteTask;
+        }
+
+        $items = $model::select(DB::raw('count(*) as scount,user_id,task_id'))
+            ->where('task_id', $task_id)
+            ->groupBy('user_id')
+            ->orderByDesc('scount')
+            ->limit(5)
+            ->get();
+        foreach ($items as $item) {
+            $item->name = $item->user()->name;
+        }
+
+        $tasks = $model::where('user_id', $request->user()->id)
+            ->where('task_id', $request->task_id)
+            ->orderByDesc('id')
+            ->paginate(20);
+
+        return response()->json([
+            'rank' => $items,
+            'tasks' => $tasks
+        ]);
     }
 }
