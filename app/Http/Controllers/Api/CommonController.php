@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\VisitTask;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 class CommonController extends Controller
