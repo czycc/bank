@@ -71,15 +71,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    window.DeviceOrientationEvent.requestPermission().then(state => {
-        if (state === "granted") {//允许
-            alert("用户允许", state)
-        } else if (state === "denied") {//拒绝
-            alert("用户拒绝", state)
-        } else if (state === "prompt") {
-            alert("用户干了啥", state)
-        }
-    })
     new Vue({
         el: '#app',
         data: {
@@ -145,6 +136,7 @@
         mounted() {
             // 监听
             this.socket = io("wss://api.shanghaichujie.com", {path: "/socket/socket.io"});
+            window.DeviceOrientationEvent.requestPermission()
             this.socket.on('becks_rank', (data) => {
                 //监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
                 for (let i = 0; i < 3; i++) {
