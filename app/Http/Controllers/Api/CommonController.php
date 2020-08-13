@@ -182,46 +182,46 @@ class CommonController extends Controller
         if ($category == 'out_task') {
             //查询用户
             $items = OutTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
-                ->where('task_id', $task_id)
+                ->where('out_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
             $tasks = OutTaskUser::where('user_id', $request->user()->id)
-                ->where('task_id', $request->task_id)
+                ->where('out_task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         } elseif ($category == 'new_task') {
             $items = NewTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
-                ->where('task_id', $task_id)
+                ->where('new_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
             $tasks = NewTaskUser::where('user_id', $request->user()->id)
-                ->where('task_id', $request->task_id)
+                ->where('new_task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         } elseif ($category == 'visit_task') {
             $items = VisitTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
-                ->where('task_id', $task_id)
+                ->where('visit_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
             $tasks = VisitTaskUser::where('user_id', $request->user()->id)
-                ->where('task_id', $request->task_id)
+                ->where('visit_task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         } else {
             $items = InviteTaskUser::select(DB::raw('count(*) as scount,user_id,task_id'))
-                ->where('task_id', $task_id)
+                ->where('invite_task_id', $task_id)
                 ->groupBy('user_id')
                 ->orderByDesc('scount')
                 ->limit(5)
                 ->get();
             $tasks = InviteTaskUser::where('user_id', $request->user()->id)
-                ->where('task_id', $request->task_id)
+                ->where('invite_task_id', $request->task_id)
                 ->orderByDesc('id')
                 ->paginate(20);
         }
