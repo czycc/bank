@@ -49,18 +49,18 @@
             <div class="rank1 mt112">
                 <img class="img-border" src="image/rank_border.png" alt="">
                 <img class="rank-icon" src="image/rank1.png" alt="">
-                <img class="img-avatar" id="top1" src="image/rank_border.png" alt="">
+                <img class="img-avatar" id="top1" v-bind:src="top1" alt="">
             </div>
             <div class="flex mt60">
                 <div class="rank2">
                     <img class="img-border" src="image/rank_border.png" alt="">
                     <img class="rank-icon" src="image/rank2.png" alt="">
-                    <img class="img-avatar" id="top2" src="image/rank_border.png" alt="">
+                    <img class="img-avatar" id="top2" v-bind:src="top2" alt="">
                 </div>
                 <div class="rank2 ml80">
                     <img class="img-border" src="image/rank_border.png" alt="">
                     <img class="rank-icon" src="image/rank3.png" alt="">
-                    <img class="img-avatar" id="top3" src="image/rank_border.png" alt="">
+                    <img class="img-avatar" id="top3" v-bind:src="top3" alt="">
                 </div>
             </div>
             <img class="logo" src="./image/logo_rank.png" alt="">
@@ -81,7 +81,11 @@
             waitTime: 15, // 15 * 100ms
             count: 0,
             isEnd: false,
-            awaitingTimer: null
+            awaitingTimer: null,
+            top1:null,
+            top2:null,
+            top3:null
+
         },
         methods: {
             shakeEventDidOccur() {
@@ -150,12 +154,11 @@
 
             this.socket.on('becks_rank', (data) => {
                 //监听游戏结束,显示排行榜,json数组,4个排行,openid,avatar,nickname,rank
-                document.getElementById('top1').src = data[0].avatar
-                document.getElementById('top2').src = data[1].avatar
-                document.getElementById('top3').src = data[2].avatar
                 this.isEnd = true
                 this.panel = 2
-
+                this.top1 = data[0].avatar
+                this.top2 = data[1].avatar
+                this.top3 = data[2].avatar
 
             });
         }
