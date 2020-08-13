@@ -122,7 +122,7 @@
             },
             toShake() {
                 this.panel = 1
-                this.socket.emit('becks_user_in', `{"openid":"{{ $user->id }}","avatar":"http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL1msAj97srmCrYkhj4xp7hguTSVJxse2fLKVcSr7AAu20GVkWblHX2z5R0THNibafNmk2cLcs7ZDg/132","nickname":"测试昵称"}`);
+                this.socket.emit('becks_user_in', `{"openid":"{{ $user->id }}","avatar":"{{ $user->avatar }}","nickname":"{{ $user->name }}"}`);
                 var myShakeEvent = new Shake({
                     threshold: 15, // optional shake strength threshold
                     timeout: 1000 // optional, determines the frequency of event generation
