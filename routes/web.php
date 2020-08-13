@@ -20,7 +20,7 @@ Route::post('img/upload', 'ImgUploadController@upload'); //编辑器上传
 
 Route::get('onlines/share', 'Api\\OnlineController@shareToOther');
 
-Route::group(['middleware' => ['wechat.oauth']], function () {
+Route::group(['middleware' => ['wechat.oauth:default,snsapi_userinfo']], function () {
     Route::get('becks/index', function () {
         $user = session('wechat.oauth_user.default'); // 拿到授权用户资料
         return view('becks', compact('user'));
