@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Becks;
 
 use App\Models\BecksRank;
+use App\Models\BecksUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,8 +28,21 @@ class BecksController extends Controller
 
     public function draw(Request $request)
     {
+        $wechat = session('wechat.oauth_user.default');
+        if ($user = BecksUser::where('openid', $wechat['id'])->first()) {
+            $item = $user->item;
+            return view('lottery', compact('item'));
+        }
         $items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         $item = array_rand($items);
+
+        BecksUser::create([
+            'openid' => $wechat['id'],
+            'nickname' => $wechat['name'],
+            'avatar' => $wechat['avatar'],
+            'item' => $item
+        ]);
+
 
         return view('lottery', compact('item'));
     }
