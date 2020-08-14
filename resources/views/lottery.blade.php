@@ -93,7 +93,7 @@
 
 					},
 					close() {
-						this.show = false
+						// this.show = false
 					}
 				},
 				created() {
