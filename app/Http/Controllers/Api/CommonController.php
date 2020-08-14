@@ -161,7 +161,6 @@ class CommonController extends Controller
             ->margin(2)
             ->generate($request->text);
         return Image::make($qrcode)->response();
-
     }
 
     /**

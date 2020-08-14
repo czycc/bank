@@ -24,4 +24,12 @@ class BecksController extends Controller
 
         return 'true';
     }
+
+    public function draw(Request $request)
+    {
+        $items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $item = array_rand($items);
+
+        return view('lottery', compact('item'));
+    }
 }
