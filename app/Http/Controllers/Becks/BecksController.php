@@ -33,7 +33,7 @@ class BecksController extends Controller
             $item = $user->item;
             return view('lottery', compact('item'));
         }
-        $items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $items = [1, 3, 4,  6, 7];
         $item = array_rand($items);
 
         BecksUser::create([
