@@ -1,0 +1,158 @@
+:root {
+	--animate-duration: 1s;
+	--animate-delay: 1s;
+	--animate-repeat: 1
+}
+.lottery {
+	background-image: url(../image/start_bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+.lottery .logo {
+	width: 1.73rem;
+	height: 1.67rem;
+	margin-top: 1.3rem;
+}
+
+.lottery-item {
+	width: 1.33rem;
+	height: 1.24rem;
+	background-size: 100% 100%;
+}
+
+.lottery-item1 {
+	background-image: url(../image/lottry1.png);
+}
+
+.lottery-item1.active {
+	background-image: url(../image/lottry1_on.png);
+}
+
+.lottery-item2 {
+	background-image: url(../image/lottry2.png);
+}
+
+.lottery-item2.active {
+	background-image: url(../image/lottry2_on.png);
+}
+
+.lottery-item3 {
+	background-image: url(../image/lottry3.png);
+}
+
+.lottery-item3.active {
+	background-image: url(../image/lottry3_on.png);
+}
+
+.lottery-item4 {
+	background-image: url(../image/lottry4.png);
+}
+
+.lottery-item4.active {
+	background-image: url(../image/lottry4_on.png);
+}
+
+.lottery-item5 {
+	background-image: url(../image/lottry5.png);
+}
+
+.lottery-item5.active {
+	background-image: url(../image/lottry5_on.png);
+}
+
+.lottery-item6 {
+	background-image: url(../image/lottry6.png);
+}
+
+.lottery-item6.active {
+	background-image: url(../image/lottry6_on.png);
+}
+
+.lottery-item7 {
+	background-image: url(../image/lottry7.png);
+}
+
+.lottery-item7.active {
+	background-image: url(../image/lottry7_on.png);
+}
+
+.lottery-item8 {
+	background-image: url(../image/lottry8.png);
+}
+
+.lottery-item8.active {
+	background-image: url(../image/lottry8_on.png);
+}
+
+.beer {
+	width: 0.93rem;
+	height: 2.47rem;
+	background-image: url(../image/beer1.png);
+	background-size: 100% 100%;
+}
+
+.dialog-container {
+	width: 6.32rem;
+	height: 4.3rem;
+	background-image: url(../image/dialog2.png);
+	background-size: 100% 100%;
+	position: relative;
+}
+.dialog-container.valuable{
+	background-image: url(../image/dialog.png);
+}
+.dialog-container .close {
+	left: 0;
+	top: 0;
+	position: absolute;
+	padding: 0.3rem;
+}
+
+.dialog-container .close img {
+	width: 0.28rem;
+	height: 0.31rem;
+}
+
+@-webkit-keyframes flash {
+
+	0%,
+	50%,
+	to {
+		opacity: 1
+	}
+
+	25%,
+	75% {
+		opacity: 0
+	}
+}
+
+@keyframes flash {
+
+	0%,
+	50%,
+	to {
+		opacity: 1
+	}
+
+	25%,
+	75% {
+		opacity: 0
+	}
+}
+
+.animate__flash {
+	-webkit-animation-name: flash;
+	animation-name: flash
+}
+
+.animate__animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-duration: var(--animate-duration);
+	animation-duration: var(--animate-duration);
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both
+}

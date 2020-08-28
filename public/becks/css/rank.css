@@ -1,0 +1,79 @@
+.rank {
+	background-image: url(../image/start_bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+.rank-wrepper {
+	position: relative;
+	height: 100vh;
+	z-index: 9;
+}
+.rank-txt img{
+	height: 0.46rem;
+}
+.rank1 {
+	position: relative;
+}
+.rank1 .img-border{
+	width: 2.07rem;
+	height: 1.93rem;
+}
+.rank1 .rank-icon {
+		width: 0.96rem;
+		height: 0.71rem;
+		position: absolute;
+		bottom: 0;
+		right: -0.1rem;
+		z-index: 99;
+}
+.rank1 .img-avatar {
+	width: 90%;
+	height: 90%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 9;
+}
+.rank2 {
+	position: relative;
+}
+.rank2 .img-border{
+	width: 1.5rem;
+	height: 1.4rem;
+}
+.rank2 .rank-icon {
+		width: 0.68rem;
+		height: 0.51rem;
+		position: absolute;
+		bottom: 0;
+		right: -0.1rem;
+		z-index: 99;
+}
+.rank2 .img-avatar {
+	width: 90%;
+	height: 90%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 9;
+}
+.beer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 3.02rem;
+	height: 4.42rem;
+	z-index: 2;
+}
+.logo {
+	width: 1.16rem;
+	height: 1.12rem;
+	margin-top: 1.72rem;
+}
+.thanks {
+	height: 0.36rem;
+	margin-top: 0.23rem;
+}

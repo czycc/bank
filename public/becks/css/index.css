@@ -1,0 +1,217 @@
+:root {
+	--animate-duration: 1s;
+	--animate-delay: 1s;
+	--animate-repeat: 1
+}
+
+.index {
+	background-image: url(../image/start_bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+	/* background-color: rgba(0,45,24,1); */
+}
+
+.index .logo img {
+	width: 2.91rem;
+	height: 2.84rem;
+}
+
+.index .ready-go {
+	margin-top: 1.12rem;
+}
+
+.index .ready-go img {
+	width: 2.82rem;
+	height: 1.97rem;
+}
+
+.rank {
+	background-image: url(../image/start_bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+.rank .rank-wrepper {
+	position: relative;
+	height: 100vh;
+	z-index: 9;
+}
+
+.rank .rank-txt img {
+	height: 0.46rem;
+}
+
+.rank .rank1 {
+	position: relative;
+}
+
+.rank .rank1 .img-border {
+	width: 2.07rem;
+	height: 1.93rem;
+}
+
+.rank .rank1 .rank-icon {
+	width: 0.96rem;
+	height: 0.71rem;
+	position: absolute;
+	bottom: 0;
+	right: -0.1rem;
+	z-index: 99;
+}
+
+.rank .rank1 .img-avatar {
+	width: 90%;
+	height: 90%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9;
+}
+
+.rank .rank2 {
+	position: relative;
+}
+
+.rank .rank2 .img-border {
+	width: 1.5rem;
+	height: 1.4rem;
+}
+
+.rank .rank2 .rank-icon {
+	width: 0.68rem;
+	height: 0.51rem;
+	position: absolute;
+	bottom: 0;
+	right: -0.1rem;
+	z-index: 99;
+}
+
+.rank .rank2 .img-avatar {
+	width: 90%;
+	height: 90%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9;
+}
+
+.rank .beer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 3.02rem;
+	height: 4.42rem;
+	z-index: 2;
+}
+
+.rank .logo {
+	width: 1.16rem;
+	height: 1.12rem;
+	margin-top: 1.72rem;
+}
+
+.rank .thanks {
+	height: 0.36rem;
+	margin-top: 0.23rem;
+}
+
+.shake {
+	background-image: url(../image/shake_bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+	/* background-color: rgba(0,45,24,1); */
+}
+
+.shake-icon img {
+	width: 4.25rem;
+	height: 5.30rem;
+}
+
+.shake-txt {
+	margin-top: 1.03rem;
+}
+
+.shake-txtimg {
+	width: 3.2rem;
+	height: 1.48rem;
+}
+
+@-webkit-keyframes swing {
+	20% {
+		-webkit-transform: rotate(15deg);
+		transform: rotate(15deg)
+	}
+
+	40% {
+		-webkit-transform: rotate(-10deg);
+		transform: rotate(-10deg)
+	}
+
+	60% {
+		-webkit-transform: rotate(5deg);
+		transform: rotate(5deg)
+	}
+
+	80% {
+		-webkit-transform: rotate(-5deg);
+		transform: rotate(-5deg)
+	}
+
+	to {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg)
+	}
+}
+
+@keyframes swing {
+	20% {
+		-webkit-transform: rotate(15deg);
+		transform: rotate(15deg)
+	}
+
+	40% {
+		-webkit-transform: rotate(-10deg);
+		transform: rotate(-10deg)
+	}
+
+	60% {
+		-webkit-transform: rotate(5deg);
+		transform: rotate(5deg)
+	}
+
+	80% {
+		-webkit-transform: rotate(-5deg);
+		transform: rotate(-5deg)
+	}
+
+	to {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg)
+	}
+}
+
+.animate__swing {
+	-webkit-transform-origin: center center;
+	transform-origin: center center;
+	-webkit-animation-name: swing;
+	animation-name: swing,
+}
+
+.animate__animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-duration: var(--animate-duration);
+	animation-duration: var(--animate-duration);
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both
+}
+
+.animate__animated.animate__infinite {
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="pragma" content="no-cache" />
+		<title>becks</title>
+		<link rel="stylesheet" href="css/vant.css">
+		<link rel="stylesheet" href="css/comman.css">
+		<link rel="stylesheet" href="css/shake.css">
+	<!-- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"> -->
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/font_rem.js"></script>
+		<script type="text/javascript" src="js/vant.min.js"></script>
+		<script type="text/javascript" src="js/jweixin-1.6.0.js"></script>
+		<script type="text/javascript" src="js/axios.min.js"></script>
+		<script type="text/javascript" src="js/http.js"></script>
+		<script type="text/javascript" src="js/shake.js"></script>
+	</head>
+	<body>
+		<div id="app" v-cloak class="container">
+			<div class="shake flex-column flex-center align-items">
+				<div class="shake-icon animate__swing animate__infinite" :class="shaked ? 'animate__animated' : ''">
+					<img src="./image/shake.png" alt="">
+				</div>
+				<div class="shake-txt">
+					<img src="./image/shake_txt.png" alt="">
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// function debounce(fn, wait) {    
+			//     var timeout = null;    
+			//     return function() {        
+			//         if(timeout !== null)   clearTimeout(timeout);        
+			//         timeout = setTimeout(fn, wait);    
+			//     }
+			// }
+			new Vue({
+				el: '#app',
+				data: {
+					shaked: false,
+					timer: null,
+					waitTime: 15 // 15 * 100ms
+				},
+				methods: {
+					auth(){
+						let params = {
+							url: "https://gd.shanghaichujie.com/becks/shake.html",
+							apis: [""],
+							debug: true
+						}
+						request("/jssdk", params, "post")
+						.then(res=>{
+							console.log(res)
+							wx.config({
+							  debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+							  appId: res.data.appId, // 必填，公众号的唯一标识
+							  timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+							  nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+							  signature: res.data.signature,// 必填，签名
+							  jsApiList: res.data.jsApiList // 必填，需要使用的JS接口列表
+							});
+						})
+					},
+					shakeEventDidOccur () {
+						this.shaked = true
+						this.waitTime = 15
+						if(!this.timer) {
+							this.timer = setInterval(()=>{
+								this.waitTime--
+								if(this.waitTime == 0) {
+									this.shaked = false
+									clearInterval(this.timer)
+									this.timer = null
+								}
+							},100)
+						}
+					}
+				},
+				created() {
+					// this.auth()
+				},
+				mounted() {
+					var myShakeEvent = new Shake({
+					    threshold: 15, // optional shake strength threshold
+					    timeout: 1000 // optional, determines the frequency of event generation
+					});
+					myShakeEvent.start();
+					window.addEventListener('shake', this.shakeEventDidOccur, false);
+				}
+			});
+		</script>
+	</body>
+</html>
