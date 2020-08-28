@@ -70,14 +70,14 @@
 						if (this.interval || this.isEnd) return
 						let timer = 8000 + this.awardIdx*500  //getRandomNumberByRange(6000, 10000)
                         let audio = document.getElementById('bgMusic')
-                        audio.play()
 						this.interval = setInterval(() => {
 							if (this.active == 8) {
 								this.active = 1
 							} else {
 								this.active++
 							}
-						}, 500)
+                            audio.play()
+                        }, 500)
 						setTimeout(() => {
 							this.stopLottry()
                             audio.pause()
