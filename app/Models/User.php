@@ -49,6 +49,11 @@ class User extends Authenticatable implements JWTSubject
         return getImgUrl($v);
     }
 
+    public function out_task()
+    {
+
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

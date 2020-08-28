@@ -16,6 +16,9 @@
 		<script type="text/javascript" src="js/vant.min.js"></script>
 	</head>
 	<body>
+    <audio id="bgMusic">
+        <source  src="https://h5-touch.oss-cn-shanghai.aliyuncs.com/MP3/%E8%BD%AE%E7%9B%98%E8%BD%AC%E5%8A%A8.mp3" type="audio/mp3">
+    </audio>
 		<div id="app" v-cloak class="container">
 			<div class="lottery flex-column flex-center align-items">
 				<div class="lottery-container">
@@ -66,6 +69,8 @@
 					startLottry() {
 						if (this.interval || this.isEnd) return
 						let timer = 8000 + this.awardIdx*500  //getRandomNumberByRange(6000, 10000)
+                        let audio = document.getElementById('bgMusic')
+                        audio.play()
 						this.interval = setInterval(() => {
 							if (this.active == 8) {
 								this.active = 1
@@ -75,6 +80,7 @@
 						}, 500)
 						setTimeout(() => {
 							this.stopLottry()
+                            audio.pause()
 						}, timer)
 					},
 					stopLottry() {
