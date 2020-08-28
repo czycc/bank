@@ -96,12 +96,12 @@
 .dialog-container {
 	width: 6.32rem;
 	height: 4.3rem;
-	background-image: url(../image/dialog2.png);
+	background-image: url(../image/dialog22.png);
 	background-size: 100% 100%;
 	position: relative;
 }
 .dialog-container.valuable{
-	background-image: url(../image/dialog.png);
+	background-image: url(../image/dialog11.png);
 }
 .dialog-container .close {
 	left: 0;

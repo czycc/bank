@@ -10,7 +10,7 @@
 		<title>becks</title>
 		<link rel="stylesheet" href="css/vant.css">
 		<link rel="stylesheet" href="css/comman.css">
-		<link rel="stylesheet" href="css/lottery.css">
+		<link rel="stylesheet" href="css/lottery1.css">
 		<script type="text/javascript" src="js/vue.min.js"></script>
 		<script type="text/javascript" src="js/font_rem.js"></script>
 		<script type="text/javascript" src="js/vant.min.js"></script>
