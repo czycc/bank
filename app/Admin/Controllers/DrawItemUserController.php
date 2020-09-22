@@ -39,7 +39,7 @@ class DrawItemUserController extends AdminController
             $filter->like('draw_item.reward', '奖品名称');
             $filter->like('draw.title', '抽奖活动名称');
             $filter->like('phone', '手机号');
-            $filter->equal('verify', '是否核销')->using([
+            $filter->equal('verify', '是否核销')->select([
                 0 => '否',
                 1 => '是'
             ]);
