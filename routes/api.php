@@ -100,3 +100,7 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
  * becks啤酒
  */
 Route::post('becks/rank', 'Becks\BecksController@rank');
+
+
+Route::post('common/sms/send', 'CommonController@send');
+Route::post('common/sms/confirm', 'CommonController@confirm');

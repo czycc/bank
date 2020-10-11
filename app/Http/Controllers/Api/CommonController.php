@@ -234,4 +234,28 @@ class CommonController extends Controller
             'tasks' => $tasks
         ]);
     }
+
+    public function send(Request $request)
+    {
+        $socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('ip'));
+        socket_connect($socket, '72.6.9.185', 16711);
+        $msg = '000071000220200919000000014170123456              '. $request->phone .'         1';
+        socket_write($socket, $msg);
+        $response = socket_read($socket, 40);
+        socket_close($socket);
+        return mb_convert_encoding($response,'utf-8','gb2312');
+//        $msg = '00010200032020091900000001320321199105160150         13331936826         4858590950d328139a6cf4f35eca1462';
+//        mb_convert_encoding($response,'utf-8','gb2312');
+    }
+
+    public function confirm(Request $request)
+    {
+        $socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('ip'));
+        socket_connect($socket, '72.6.9.185', 16711);
+        $msg = '00010200032020091900000001320321199105160150     '.$request->phone .'          '.md5($request->code);
+        socket_write($socket, $msg);
+        $response = socket_read($socket, 40);
+        socket_close($socket);
+        return mb_convert_encoding($response,'utf-8','gb2312');
+    }
 }
