@@ -10,7 +10,7 @@ class OutTaskRequest extends FormRequest
             'verify_code' => [
                 'required',
                 'string',
-                'size:4'
+                'size:6'
             ],
             'verify_key' => 'required',
             'user_id' => 'required',

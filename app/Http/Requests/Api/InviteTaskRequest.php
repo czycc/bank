@@ -10,7 +10,7 @@ class InviteTaskRequest extends FormRequest
             'verify_code' => [
                 'required',
                 'string',
-                'size:4'
+                'size:6'
             ],
             'verify_key' => 'required',
             'invite_task_id' => 'required|exists:invite_tasks,id',

@@ -16,7 +16,7 @@ class VisitTaskRequest extends FormRequest
             'verify_code' => [
                 'required',
                 'string',
-                'size:4'
+                'size:6'
             ],
             'verify_key' => 'required',
             'visit_task_id' => 'required|exists:visit_tasks,id',
