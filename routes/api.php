@@ -21,7 +21,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
     // 短信验证码
     Route::post('verificationCodes', 'VerificationCodesController@store')
         ->name('verificationCodes.store');
-
+    Route::post('common/sms/send', 'Api\CommonController@send');
+    Route::post('common/sms/confirm', 'Api\CommonController@confirm');
     //login
     Route::post('login', 'UserController@login')->name('user.login');
 
@@ -102,5 +103,4 @@ Route::prefix('v1')->middleware('auth:api')->namespace('Api')->name('api.v1.')->
 Route::post('becks/rank', 'Becks\BecksController@rank');
 
 
-Route::post('common/sms/send', 'CommonController@send');
-Route::post('common/sms/confirm', 'CommonController@confirm');
+
