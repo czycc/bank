@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @param $v
  * @return string
@@ -12,4 +11,20 @@ function getImgUrl($v) {
     } elseif (!is_null($v)) {
         return asset('upload'. '/' . $v) ;
     }
+}
+
+function confirmSms($phone, $code) {
+    $client = new \GuzzleHttp\Client([
+        'timeout' => 10.0,
+        'base_uri' => 'http://112.81.84.7:8000'
+    ]);
+    $res = $client->request('POST', 'api/v1/common/sms/confirm', [
+        'json' => [
+            'phone' => $phone,
+            'code' => $code
+        ]
+    ]);
+    $content = $res->getBody()->getContents();
+
+    return (bool)$content;
 }

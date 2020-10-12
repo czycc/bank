@@ -42,17 +42,12 @@ class VisitTaskController extends Controller
     {
         //获取验证码
         $data = Cache::get($request->verify_key);
-
-
         if (!$data) {
             abort(400, '验证码已过期，请重新发送');
         }
-
-        if (!hash_equals($data['code'], $request->verify_code)) {
-            // 返回401
+        if (!confirmSms($request->phone, $request->verify_code)) {
             abort(400, '验证码不符合');
         }
-
         if (
         !VisitTask::where('id', $request->visit_task_id)
             ->where('enable', 1)

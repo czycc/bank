@@ -80,7 +80,7 @@ class OnlineController extends Controller
             abort(400, '验证码已过期，请重新发送');
         }
 
-        if (!hash_equals($data['code'], $request->verify_code)) {
+        if (!confirmSms($request->phone, $request->verify_code)) {
             // 返回401
             abort(400, '验证码不符合');
         }
