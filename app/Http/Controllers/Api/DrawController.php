@@ -72,27 +72,28 @@ class DrawController extends Controller
             'draw_item_id' => $draw_item_id,
             'draw_id' => $draw->id
         ]);
-        $draw_item = DrawItem::find($draw_item_id);
 
-        //发送中奖信息
-        $client = new Client([
-            'timeout' => 10.0,
-            'base_uri' => 'http://112.81.84.7:8000'
-        ]);
-        $client->request('POST', 'api/v1/common/sms/send', [
-            'json' => [
-                'msg' => '000071000220200919000000014169'.
-                    str_pad($draw_item->reward, 20)
-                    . $data['phone'] .'         1',
-                'category' => 'normal'
-            ]
-        ]);
 
         unset($a);
 
         //减少库存
         if ($draw_item_id) {
             $item = DrawItem::find($draw_item_id);
+
+            //发送中奖信息
+            $client = new Client([
+                'timeout' => 10.0,
+                'base_uri' => 'http://112.81.84.7:8000'
+            ]);
+            $client->request('POST', 'api/v1/common/sms/send', [
+                'json' => [
+                    'msg' => '000071000220200919000000014169'.
+                        str_pad($item->reward, 20)
+                        . $data['phone'] .'         1',
+                    'category' => 'normal'
+                ]
+            ]);
+
             $item->stock -= 1;
             $item->out += 1;
             $item->save();
