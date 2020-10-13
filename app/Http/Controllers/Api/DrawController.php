@@ -81,7 +81,7 @@ class DrawController extends Controller
             $item = DrawItem::find($draw_item_id);
 
             $msg = '000071000220200919000000014169'.
-                str_pad(mb_convert_encoding($item->reward, 'gb2312', 'utf-8'), 20)
+                mb_convert_encoding(str_pad(mb_convert_encoding($item->reward, 'gb2312', 'utf-8'), 'utf-8', 'gb2312'), 20)
                 . $data['phone'] .'         1';
             abort(400, $msg);
             //发送中奖信息
@@ -91,9 +91,7 @@ class DrawController extends Controller
             ]);
             $client->request('POST', 'api/v1/common/sms/send', [
                 'json' => [
-                    'msg' => '000071000220200919000000014169'.
-                        str_pad($item->reward, 20)
-                        . $data['phone'] .'         1',
+                    'msg' => $msg,
                     'category' => 'draw'
                 ]
             ]);
