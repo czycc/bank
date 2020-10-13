@@ -81,7 +81,7 @@ class DrawController extends Controller
             $item = DrawItem::find($draw_item_id);
 
             $msg = '000071000220200919000000014169'.
-                mb_convert_encoding(str_pad(mb_convert_encoding($item->reward, 'gb2312', 'utf-8'), 'utf-8', 'gb2312'), 20)
+                mb_convert_encoding(str_pad(mb_convert_encoding($item->reward, 'gb2312', 'utf-8'), 20), 'utf-8', 'gb2312')
                 . $data['phone'] .'         1';
             abort(400, $msg);
             //发送中奖信息
