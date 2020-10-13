@@ -240,7 +240,7 @@ class CommonController extends Controller
         $socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('ip'));
         socket_connect($socket, '72.6.9.185', 16711);
         if ($request->category == 'draw') {
-            $msg = mb_convert_encoding($request->msg, 'gb2312', 'utf-8');
+            $msg = $request->msg;
         } else {
             $msg = '000071000220200919000000014170123456              '. $request->phone .'         1';
         }
