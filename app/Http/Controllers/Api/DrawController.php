@@ -90,7 +90,7 @@ class DrawController extends Controller
                     'msg' => '000071000220200919000000014169'.
                         str_pad($item->reward, 20)
                         . $data['phone'] .'         1',
-                    'category' => 'normal'
+                    'category' => 'draw'
                 ]
             ]);
 
