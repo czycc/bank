@@ -36,6 +36,8 @@ class DrawItemUserController extends AdminController
             // 在这里添加字段过滤器
             $filter->like('title', __('Title'));
             $filter->like('user.name', '业务员姓名');
+            $filter->like('user.unit', __('Unit'));
+            $filter->like('user.department', __('Department'));
             $filter->like('draw_item.reward', '奖品名称');
             $filter->like('draw.title', '抽奖活动名称');
             $filter->like('phone', '手机号');
@@ -49,6 +51,8 @@ class DrawItemUserController extends AdminController
         });
         $grid->column('id', __('Id'));
         $grid->column('user.name', __('Name'));
+        $grid->column('user.unit', __('Unit'));
+        $grid->column('user.department', __('Department'));
         $grid->column('draw_item.reward', '奖品名称');
         $grid->column('draw.title', '抽奖活动名称');
         $grid->column('phone', __('Phone'));
