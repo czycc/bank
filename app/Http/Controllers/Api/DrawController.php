@@ -59,7 +59,7 @@ class DrawController extends Controller
         }
 
         foreach ($draw->items as $item) {
-            if ($item->stock > 0 ) {
+            if ($item->stock > 0 && $item->odds > 0) {
                 $a[] = $item->id;
             }
         }
