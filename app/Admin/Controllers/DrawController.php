@@ -102,7 +102,7 @@ class DrawController extends AdminController
         $form->image('background', __('Background'));
         $form->hasMany('items', '奖品', function (Form\NestedForm $form) {
             $form->text('reward', __("Reward"))->rules('required');
-            $form->image('reward_bg', "奖品图片")->rules('');
+            $form->image('reward_bg', "奖品图片(必填) *");
             $form->text('odds', __("Odds"))->rules('required|between:0,100');
             $form->text('stock', __("Stock"))->rules("required|min:0");
             $form->hidden("out", __("Out"))->default(0);
