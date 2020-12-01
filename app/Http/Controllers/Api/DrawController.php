@@ -155,7 +155,11 @@ class DrawController extends Controller
             ->get();
         foreach ($items as $item) {
             $item->reward = DrawItem::find($item->draw_item_id)->reward;
-            $item->draw_title = $item->draw->title;
+            if ($item->draw) {
+                $item->draw_title = $item->draw->title;
+            } else {
+                unset($item);
+            }
         }
 
         return response()->json($items);
