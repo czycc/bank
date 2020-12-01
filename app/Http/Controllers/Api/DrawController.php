@@ -64,7 +64,7 @@ class DrawController extends Controller
             }
         }
 
-        $draw_item_id = array_rand($a);
+        $draw_item_id = $a[array_rand($a)];
 
         $i = DrawItemUser::create([
             'phone' => $data['phone'],
