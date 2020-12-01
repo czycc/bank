@@ -14,8 +14,11 @@ function getImgUrl($v) {
 }
 
 function confirmSms($phone, $code) {
+    if (!$phone || !$code) {
+        return false;
+    }
     $client = new \GuzzleHttp\Client([
-        'timeout' => 20.0,
+        'timeout' => 10.0,
         'base_uri' => 'http://112.81.84.7:8000'
     ]);
     $res = $client->request('POST', 'api/v1/common/sms/confirm', [
