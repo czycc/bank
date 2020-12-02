@@ -14,24 +14,25 @@
 use GuzzleHttp\Client;
 
 Route::get('/', function () {
-    $msg = '000071000220200919000000014169'.
-        mb_convert_encoding(str_pad(mb_convert_encoding('测试商品', 'gb2312', 'utf-8'), 20), 'utf-8', 'gb2312')
-        . '13331936826' .'         1';
-    //发送中奖信息
-    $client = new Client([
-        'timeout' => 10.0,
-        'base_uri' => 'http://112.81.84.7:8000'
-    ]);
-    $res = $client->request('POST', 'api/v1/common/sms/send', [
-        'json' => [
-            'msg' => $msg,
-            'category' => 'draw'
-        ]
-    ]);
-
-    $content = $res->getBody()->getContents();
-
-    dd($content);
+//    $msg = '000071000220200919000000014169'.
+//        mb_convert_encoding(str_pad(mb_convert_encoding('测试商品', 'gb2312', 'utf-8'), 20), 'utf-8', 'gb2312')
+//        . '13331936826' .'         1';
+//    //发送中奖信息
+//    $client = new Client([
+//        'timeout' => 10.0,
+//        'base_uri' => 'http://112.81.84.7:8000'
+//    ]);
+//    $res = $client->request('POST', 'api/v1/common/sms/send', [
+//        'json' => [
+//            'msg' => $msg,
+//            'category' => 'draw'
+//        ]
+//    ]);
+//
+//    $content = $res->getBody()->getContents();
+//
+//    dd($content);
+    dd(confirmSms('13331936826', '153674'));
 });
 Route::get('qrcode', 'Api\\CommonController@qrcode');
 
