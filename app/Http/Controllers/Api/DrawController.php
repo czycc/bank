@@ -67,7 +67,7 @@ class DrawController extends Controller
         }
         $arr = [];
         foreach ($items as $item) {
-            $arr[$item->id] = $item->odd;
+            $arr[$item->id] = $item->odds;
         }
 
         $oddSum = array_sum($arr);
