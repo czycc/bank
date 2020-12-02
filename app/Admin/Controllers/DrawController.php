@@ -104,6 +104,7 @@ class DrawController extends AdminController
             $form->text('reward', __("Reward"))->rules('required');
             $form->image('reward_bg', "奖品图片(必填) *");
             $form->text('odds', __("Odds"))->rules('required|between:0,100');
+            $form->html('不需要单独设置谢谢参与,总中奖率低于100时,剩余为未中奖几率', '注意事项');
             $form->text('stock', __("Stock"))->rules("required|min:0");
             $form->hidden("out", __("Out"))->default(0);
         });
