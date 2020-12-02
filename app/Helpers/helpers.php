@@ -30,5 +30,5 @@ function confirmSms($phone, $code) {
     ]);
     $content = $res->getBody()->getContents();
 
-    return (bool)$content;
+    return (bool)stripos($content, '交易成功');
 }

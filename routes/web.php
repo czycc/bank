@@ -32,7 +32,7 @@ Route::get('/', function () {
 //    $content = $res->getBody()->getContents();
 //
 //    dd($content);
-    dd(confirmSms('13331936826', '153674'));
+//    dd(confirmSms('13331936826', '591982'));
 });
 Route::get('qrcode', 'Api\\CommonController@qrcode');
 
