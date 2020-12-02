@@ -14,6 +14,10 @@ function getImgUrl($v) {
 }
 
 function confirmSms($phone, $code) {
+    if (!$phone || !$code) {
+        return false;
+    }
+
     $client = new \GuzzleHttp\Client([
         'timeout' => 10.0,
         'base_uri' => 'http://112.81.84.7:8000'
@@ -26,5 +30,5 @@ function confirmSms($phone, $code) {
     ]);
     $content = $res->getBody()->getContents();
 
-    return (bool)$content;
+    return (bool)stripos($content, '交易成功');
 }

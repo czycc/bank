@@ -256,7 +256,7 @@ class CommonController extends Controller
     {
         $socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('ip'));
         socket_connect($socket, '72.6.9.185', 16711);
-        $msg = '00010200032020091900000001320321199105160150     '.$request->phone .'          '.md5($request->code);
+        $msg = '00010200032020091900000001320321199105160150      '.$request->phone .'         '.md5($request->code);
         socket_write($socket, $msg);
         $response = socket_read($socket, 100);
         socket_close($socket);
