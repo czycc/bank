@@ -43,7 +43,7 @@ class InviteTaskController extends Controller
         if (!$data) {
             abort(400, '验证码已过期，请重新发送');
         }
-        if (!confirmSms($request->phone, $request->verify_code)) {
+        if (!confirmSms($data['phone'], $data['code'])) {
             abort(400, '验证码不符合');
         }
 
