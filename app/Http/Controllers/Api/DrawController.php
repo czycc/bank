@@ -49,7 +49,6 @@ class DrawController extends Controller
 
         $draw = Draw::find($data['draw_id']);
 
-        $a[] = 0;
         $num = DrawItemUser::where('phone', $data['phone'])
             ->where('draw_id', $draw->id)
             ->count();
@@ -58,31 +57,55 @@ class DrawController extends Controller
             abort(400, '很抱歉,您的抽奖次数已用完');
         }
 
-        foreach ($draw->items as $item) {
-            if ($item->stock > 0 && $item->odds > 0) {
-                $a[] = $item->id;
-            }
+        $items = DrawItem::where('draw_id', $draw->id)
+            ->where('odds', '>', 0)
+            ->where('stock', '>', 0)
+            ->get();
+
+        if ($items->isEmpty()) {
+            abort(400, '很遗憾,奖品已发完');
+        }
+        $arr = [];
+        foreach ($items as $item) {
+            $arr[$item->id] = $item->odd;
         }
 
-        $draw_item_id = array_rand($a);
+        $oddSum = array_sum($arr);
+
+        //小于100时自动补全中奖率
+        if ($oddSum < 100) {
+            $arr[0] = 100 - $oddSum;
+        }
+        $o = 0;
+        foreach ($arr as $id => $value) {
+            $k = mt_rand(1, $oddSum);
+            if ($k <= $value) {
+                $o = $id;
+                break;
+            } else {
+                $oddSum -= $value;
+            }
+        }
+        unset($arr);
+
 
         $i = DrawItemUser::create([
             'phone' => $data['phone'],
             'user_id' => $data['user_id'],
-            'draw_item_id' => $draw_item_id,
+            'draw_item_id' => $o,
             'draw_id' => $draw->id
         ]);
 
 
         unset($a);
 
-        //减少库存
-        if ($draw_item_id) {
-            $item = DrawItem::find($draw_item_id);
+        if ($o) {
+            //减少库存
+            $item = DrawItem::find($o);
 
-            $msg = '000071000220200919000000014169'.
+            $msg = '000071000220200919000000014169' .
                 mb_convert_encoding(str_pad(mb_convert_encoding($item->reward, 'gb2312', 'utf-8'), 20), 'utf-8', 'gb2312')
-                . $data['phone'] .'         1';
+                . $data['phone'] . '         1';
             //发送中奖信息
             $client = new Client([
                 'timeout' => 10.0,
@@ -94,11 +117,12 @@ class DrawController extends Controller
                     'category' => 'draw'
                 ]
             ]);
-
-            $item->stock -= 1;
-            $item->out += 1;
-            $item->save();
         }
+
+        $item->stock -= 1;
+        $item->out += 1;
+        $item->save();
+
 
         return response()->json($i);
     }
@@ -130,7 +154,7 @@ class DrawController extends Controller
             abort(400, '不合法的业务员id');
         }
         //保存
-        $key = 'draw_'.\Str::random(15);
+        $key = 'draw_' . \Str::random(15);
         $expiredAt = now()->addMinutes(30);
         \Cache::put($key, [
             'phone' => $data['phone'],
