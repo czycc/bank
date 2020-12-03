@@ -47,7 +47,7 @@ class DrawController extends Controller
             abort(400, '您的验证已失效，请重新发送验证码');
         }
         if (\Cache::get($data['phone'])) {
-            abort(400, '请稍等1分钟再发');
+            abort(400, '短信发送频繁,请耐心等待1分钟');
         }
         $draw = Draw::find($data['draw_id']);
 

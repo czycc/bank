@@ -17,7 +17,7 @@ class VerificationCodesController extends Controller
         $category = $request->category;
 
         if (\Cache::get($phone)) {
-            abort(400, '请稍等1分钟');
+            abort(400, '短信发送频繁,请耐心等待1分钟');
         }
 
         if ($category == 'login') {
