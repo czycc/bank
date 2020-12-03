@@ -46,7 +46,9 @@ class DrawController extends Controller
         if (!$data) {
             abort(400, '您的验证已失效，请重新发送验证码');
         }
-
+        if (\Cache::get($data['phone'])) {
+            abort(400, '请稍等1分钟再发');
+        }
         $draw = Draw::find($data['draw_id']);
 
         $num = DrawItemUser::where('phone', $data['phone'])
@@ -117,6 +119,9 @@ class DrawController extends Controller
                     'category' => 'draw'
                 ]
             ]);
+
+            $eX = now()->addMinutes(1);
+            \Cache::put($data['phone'], true, $eX); //设置验证码间隔
         }
 
         $item->stock -= 1;
@@ -154,7 +159,7 @@ class DrawController extends Controller
             abort(400, '不合法的业务员id');
         }
         //保存
-        $key = 'draw_'.\Str::random(15);
+        $key = 'draw_' . \Str::random(15);
         $expiredAt = now()->addMinutes(30);
         \Cache::put($key, [
             'phone' => $data['phone'],
