@@ -15,6 +15,11 @@ class VerificationCodesController extends Controller
     {
         $phone = $request->phone;
         $category = $request->category;
+
+        if (\Cache::get($phone)) {
+            abort(400, '请稍等1分钟');
+        }
+
         if ($category == 'login') {
             if (!User::where('phone', $phone)->first()) {
                 abort(400, '用户手机号不存在');
@@ -54,6 +59,9 @@ class VerificationCodesController extends Controller
           ]);
         $key = 'verificationCode_'. \Str::random(15);
         $expiredAt = now()->addMinutes(3);
+        $eX = now()->addMinutes(1);
+        \Cache::put($phone, true, $eX); //设置验证码间隔
+
         // 缓存验证码 3分钟过期。
         \Cache::put($key, ['phone' => $phone, 'code' => $code], $expiredAt);
 
