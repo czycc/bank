@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 
 Route::get('/', function () {
 //    $msg = '000071000220200919000000014169'.
-//        mb_convert_encoding(str_pad(mb_convert_encoding('测试商品', 'gb2312', 'utf-8'), 20), 'utf-8', 'gb2312')
+//        mb_convert_encoding(str_pad(mb_convert_encoding('丰富大气礼盒', 'gb2312', 'utf-8'), 20), 'utf-8', 'gb2312')
 //        . '13331936826' .'         1';
 //    //发送中奖信息
 //    $client = new Client([
@@ -30,7 +30,6 @@ Route::get('/', function () {
 //    ]);
 //
 //    $content = $res->getBody()->getContents();
-//
 //    dd($content);
 //    dd(confirmSms('13331936826', '591982'));
 });
@@ -55,3 +54,6 @@ Route::group(['middleware' => ['wechat.oauth:default,snsapi_userinfo']], functio
     });
 });
 
+Route::get('siku', function () {
+    return redirect('https://api.shanghaichujie.com/wechat/userinfo?redirect_url=http://gd.shanghaichujie.com/h5/siku/index.html');
+});
